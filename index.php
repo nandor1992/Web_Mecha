@@ -1,3 +1,4 @@
 <?php
-echo "Hello World";
+//test by Zoltan
+echo "Hello World, hello";
 ?>

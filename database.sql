@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `answers_text` (
 -- Table structure for table `answers_y/n`
 --
 
-CREATE TABLE IF NOT EXISTS `answers_y/n` (
+CREATE TABLE IF NOT EXISTS `answers_yn` (
   `a_id` int(11) NOT NULL AUTO_INCREMENT,
   `q_id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,

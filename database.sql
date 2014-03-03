@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2014 at 02:13 AM
+-- Generation Time: Mar 03, 2014 at 01:10 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `answers_number` (
   `q_id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
   `w_id` int(11) NOT NULL,
-  `a_var` varchar(4) NOT NULL,
+  `var_id` int(11) NOT NULL,
   `answer` int(11) NOT NULL,
   PRIMARY KEY (`a_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `answers_text` (
   `q_id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
   `w_id` int(11) NOT NULL,
-  `a_var` varchar(4) NOT NULL,
+  `var_id` int(11) NOT NULL,
   `answer` text NOT NULL,
   PRIMARY KEY (`a_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `answers_text` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers_y/n`
+-- Table structure for table `answers_yn`
 --
 
 CREATE TABLE IF NOT EXISTS `answers_yn` (
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `answers_yn` (
   `q_id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
   `w_id` int(11) NOT NULL,
-  `a_var` varchar(4) NOT NULL,
+  `var_id` int(11) NOT NULL,
   `answer` tinyint(1) NOT NULL,
   PRIMARY KEY (`a_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -135,6 +135,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lst_name` varchar(20) NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `variable`
+--
+
+CREATE TABLE IF NOT EXISTS `variable` (
+  `var_id` int(11) NOT NULL AUTO_INCREMENT,
+  `q_id` int(11) NOT NULL,
+  `var_name` varchar(255) NOT NULL,
+  `var_type` int(11) NOT NULL,
+  PRIMARY KEY (`var_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['username']="anyad";
-$_SESSION['admin']=1;
+session_unset();
 header('Location: index.php');
 ?>

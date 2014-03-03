@@ -5,7 +5,7 @@ session_start()
 ?>
 <head>
 <!--- Title goes here -->
-<title> TECoL - Main Page</title>
+<title> TECoL - Administrator Page</title>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
 <link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
@@ -44,8 +44,8 @@ session_start()
     <div id="navigation">
       <ul>
 	  <!--- Remember to do the Active stuff --->
-        <li><a href="index.php" class="active">Home</a></li>
-        <li><a href="about.php">About</a></li>
+        <li><a href="index.php" >Home</a></li>
+        <li><a href="about.php" >About</a></li>
         <!-- Menu bar for admin and user --->
 		<?php
 		if(isset($_SESSION['username']))
@@ -53,7 +53,7 @@ session_start()
 		echo "<li><a href='worksheet.php'>Worksheet</a></li>";
         if (isset($_SESSION['admin']))
 		{
-		echo "<li><a href='admin.php'>Administrator</a></li>";
+		echo "<li><a href='admin.php' class='active'>Administrator</a></li>";
 		}
         }
 		?>
@@ -64,7 +64,7 @@ session_start()
 		<div class="highlight">
 		<!---- This is where it all begins -->
 		
-          <h3>Index - Main Page</h3>
+          <h3> Administrator </h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
         

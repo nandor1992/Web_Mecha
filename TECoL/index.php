@@ -1,7 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
-session_start()
+session_start();
+if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
+{print "<script type=\"text/javascript\">";
+print "alert('Error,Please log in to view this page')";
+print "</script>";   
+}
+if (isset($_REQUEST['error']) and $_REQUEST['error']==2) 
+{print "<script type=\"text/javascript\">";
+print "alert('Error,You need to be administrator to view this page')";
+print "</script>";   
+}
+if (isset($_REQUEST['error']) and $_REQUEST['error']==3) 
+{print "<script type=\"text/javascript\">";
+print "alert('Error,Invalid Page Acces')";
+print "</script>";   
+}
 ?>
 <head>
 <!--- Title goes here -->
@@ -67,7 +82,6 @@ session_start()
           <h3>Index - Main Page</h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-        
 		<!--- This is where it all ends --->  
 		</div>
 

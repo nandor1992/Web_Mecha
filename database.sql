@@ -200,8 +200,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`u_id`, `u_type`, `username`, `password`, `first_name`, `last_name`) VALUES
 (1, 2, 'nandor1992', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Nandor', 'Verba'),
 (2, 1, 'nandor', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Nandor', 'Verba'),
-(3, 1, '', 'd41d8cd98f00b204e9800998ecf8427e', '', ''),
-(6, 1, 'Zoltan21', 'ebbc3c26a34b609dc46f5c3378f96e08', 'Zoltan', 'Nagy');
+(3, 1, 'Zoltan21', 'ebbc3c26a34b609dc46f5c3378f96e08', 'Zoltan', 'Nagy');
 
 -- --------------------------------------------------------
 
@@ -229,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
   `u_id` int(11) NOT NULL,
   `w_name` varchar(30) NOT NULL,
   `w_type` tinyint(1) NOT NULL COMMENT '0 for Structural 1 for CFD',
-  `w_date` datetime NOT NULL,
+  `w_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`w_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

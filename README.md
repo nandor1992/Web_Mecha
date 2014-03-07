@@ -2,6 +2,17 @@ Web_Mecha
 
 Project Meeting Results:
 
+Var types explained:
+
+1- Country id
+2- Text (2000 char)
+3- Big-int 64-bit
+4- Boolean - Requires answer(important for questions form)
+5- Boolean - Doesn't require answe (important for questions form)
+5- Percentage (int I guess, no restrictions)
+6- percentage (int all must be under 100%, and C17≥C18≥C19……≥C22 actually their sum must be under that value but it's okey this way )
+
+*B21 is actually a number
 General Structure: 
  Index - Login - Home - Worksheet - About - Administrator
 

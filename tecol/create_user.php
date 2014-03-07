@@ -20,6 +20,7 @@ $sql="INSERT INTO users(u_type,username,password,first_name,last_name) VALUES('$
 $result=mysql_query($sql);
 if($result){
 $_SESSION['username']=$first." ".$last;
+$_SESSION['id']=$username;
 header('Location: index.php?');
 }
 else

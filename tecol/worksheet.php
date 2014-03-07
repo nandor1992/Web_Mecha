@@ -70,8 +70,37 @@ header('Location: index.php?error=1');
 		
           <h3> Worksheet </h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-        
+          <p> Basik form, to acces questions with variables:</p>
+		  <form id='question' style='text-align:center' action='question.php' method='post' accept-charset='UTF-8'>
+<fieldset >
+<legend>Question Selector</legend>
+<h1> Question </h1>
+ </br>
+<input type='hidden' name='submitted' id='submitted' value='1'/>
+ 
+<label for='username' >Question_id</label>
+<input type='int' name='question' id='question'  />
+ </br>
+ <label for='country' >Country_id</label>
+<input type='int' name='country' id='country'  />
+ </br>
+ <label for='last_name' >Worksheet_id:</label>
+<input type='int' name='worksheet' id='worksheet' />
+ </br>
+<input type='submit' name='Submit' value='Go to Question' />
+ 
+</fieldset>
+</form>
+</br>
+<h3> For Generate Report: </h3>
+<form style='text-align:center' action='report.php' method='post' accept-charset='UTF-8'>
+</br>
+ <label for='last_name' >Worksheet_id:</label>
+<input type='int' name='worksheet' id='worksheet' />
+ </br>
+<input type='submit' name='Submit' value='Generate Worksheet' />
+</form>
+		  
 		<!--- This is where it all ends --->  
 		</div>
 

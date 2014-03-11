@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2014 at 10:53 PM
+-- Generation Time: Mar 10, 2014 at 09:57 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -20,37 +20,11 @@ SET time_zone = "+00:00";
 -- Database: `database`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `answers_number`
---
-
-CREATE TABLE IF NOT EXISTS `answers_number` (
-  `a_id` int(11) NOT NULL AUTO_INCREMENT,
-  `q_id` int(11) NOT NULL,
-  `u_id` int(11) NOT NULL,
-  `w_id` int(11) NOT NULL,
-  `var_id` int(11) NOT NULL,
-  `skip` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-unskipped 1-skipped',
-  `answer` bigint(20) NOT NULL,
-  PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `answers_number`
---
-
-INSERT INTO `answers_number` (`a_id`, `q_id`, `u_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
-(1, 1, 1, 1, 1, 0, 23);
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `answers_text`
 --
 
-CREATE TABLE IF NOT EXISTS `answers_text` (
+CREATE TABLE IF NOT EXISTS `answers` (
   `a_id` int(11) NOT NULL AUTO_INCREMENT,
   `q_id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
@@ -59,41 +33,18 @@ CREATE TABLE IF NOT EXISTS `answers_text` (
   `skip` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-unskipped 1-skipped',
   `answer` text NOT NULL,
   PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `answers_text`
 --
 
-INSERT INTO `answers_text` (`a_id`, `q_id`, `u_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
+INSERT INTO `answers` (`a_id`, `q_id`, `u_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
 (1, 2, 1, 1, 2, 0, 'It''s romania, it''s bound to have some of this!'),
 (2, 4, 1, 1, 5, 0, 'High barrier stuff, of course we has thats!');
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `answers_yn`
---
-
-CREATE TABLE IF NOT EXISTS `answers_yn` (
-  `a_id` int(11) NOT NULL AUTO_INCREMENT,
-  `q_id` int(11) NOT NULL,
-  `u_id` int(11) NOT NULL,
-  `w_id` int(11) NOT NULL,
-  `var_id` int(11) NOT NULL,
-  `skip` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-unskipped 1-skipped',
-  `answer` tinyint(1) NOT NULL,
-  PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `answers_yn`
---
-
-INSERT INTO `answers_yn` (`a_id`, `q_id`, `u_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
-(1, 4, 1, 1, 4, 0, 1);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `countries`
@@ -161,12 +112,12 @@ INSERT INTO `hint` (`h_id`, `q_id`, `country_id`, `hint`) VALUES
 (1, 3, 3, 'Hint Question 3 country Bulgaria'),
 (2, 4, 3, 'Hint Question 4 country Bulgaria'),
 (3, 5, 3, 'Hint Question 5 country Bulgaria'),
-(4, 7, 3, 'Hint Question 6 country Bulgaria'),
+(4, 6, 3, 'Hint Question 6 country Bulgaria'),
 (5, 7, 3, 'Hint Question 7 country Bulgaria'),
 (6, 3, 23, 'Hint Question 3 country Romania'),
 (7, 4, 23, 'Hint Question 4 country Romania'),
 (8, 5, 23, 'Hint Question 5 country Romania'),
-(9, 7, 23, 'Hint Question 6 country Romania'),
+(9, 6, 23, 'Hint Question 6 country Romania'),
 (10, 7, 23, 'Hint Question 7 country Romania');
 
 -- --------------------------------------------------------
@@ -180,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `w_type` int(11) NOT NULL,
   `question` varchar(1000) NOT NULL,
   PRIMARY KEY (`q_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 --
 -- Dumping data for table `questions`
@@ -276,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(20) NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
@@ -407,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
   `w_type` tinyint(1) NOT NULL COMMENT '0 for Structural 1 for CFD',
   `w_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `worksheet`
@@ -418,7 +369,7 @@ INSERT INTO `worksheet` (`w_id`, `u_id`, `w_name`, `w_type`, `w_date`) VALUES
 (2, 1, 'Default_CFD', 2, '2014-03-07 20:16:57'),
 (3, 1, 'Default_Both', 3, '2014-03-07 20:17:18'),
 (4, 1, 'Worksheet test1', 2, '2014-03-08 21:46:43'),
-(5, 1, 'Worksheet_lotsa', 1, '2014-03-08 23:23:48');
+(6, 1, 'W1', 1, '2014-03-10 18:05:51');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

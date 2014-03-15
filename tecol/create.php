@@ -4,7 +4,7 @@
 session_start();
 if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
 {print "<script type=\"text/javascript\">";
-print "alert('Error,wrong username or passsword!')";
+print "alert('Please complete all fields!')";
 print "</script>";   
 }
 ?>
@@ -103,7 +103,7 @@ print "</script>";
   </div>
   <div id="footer">
     <p class='left'>Copyright &copy; 2014, UTC-N Cluj Napoca, All Rights Reserved</p>
-    <p class='right'>Made by: Iza Birs, Zoltán Nagy, Nándor Verba</p>
+    <p class='right'>Made by: Isabela Bîrs, Zoltán Nagy, Nándor Verba</p>
     <div class='cl'></div>
   </div>
 </div>

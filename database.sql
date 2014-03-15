@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2014 at 09:57 PM
+-- Generation Time: Mar 15, 2014 at 10:59 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -20,31 +20,36 @@ SET time_zone = "+00:00";
 -- Database: `database`
 --
 
+-- --------------------------------------------------------
+
 --
--- Table structure for table `answers_text`
+-- Table structure for table `answers`
 --
 
 CREATE TABLE IF NOT EXISTS `answers` (
   `a_id` int(11) NOT NULL AUTO_INCREMENT,
   `q_id` int(11) NOT NULL,
-  `u_id` int(11) NOT NULL,
   `w_id` int(11) NOT NULL,
   `var_id` int(11) NOT NULL,
   `skip` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0-unskipped 1-skipped',
   `answer` text NOT NULL,
-  PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  PRIMARY KEY (`a_id`),
+  UNIQUE KEY `a_id` (`a_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Dumping data for table `answers_text`
+-- Dumping data for table `answers`
 --
 
-INSERT INTO `answers` (`a_id`, `q_id`, `u_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
-(1, 2, 1, 1, 2, 0, 'It''s romania, it''s bound to have some of this!'),
-(2, 4, 1, 1, 5, 0, 'High barrier stuff, of course we has thats!');
+INSERT INTO `answers` (`a_id`, `q_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
+(1, 2, 1, 2, 0, 'It''s romania, it''s bound to have some of this!'),
+(2, 4, 1, 5, 0, 'High barrier stuff, of course we has thats!'),
+(3, 4, 1, 4, 0, 'This is answer 2 '),
+(5, 3, 1, 3, 1, 'Skipped'),
+(13, 5, 1, 6, 1, ''),
+(14, 5, 1, 7, 1, '');
 
 -- --------------------------------------------------------
-
 
 --
 -- Table structure for table `countries`
@@ -102,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `hint` (
   `country_id` int(11) NOT NULL,
   `hint` varchar(2000) NOT NULL,
   PRIMARY KEY (`h_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `hint`
@@ -227,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(20) NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `users`
@@ -235,8 +240,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`u_id`, `u_type`, `username`, `password`, `first_name`, `last_name`) VALUES
 (1, 2, 'nandor1992', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Nandor', 'Verba'),
-(2, 1, 'nandor', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Nandor', 'Verba'),
-(3, 2, 'Zoltan21', 'ebbc3c26a34b609dc46f5c3378f96e08', 'Zoltan', 'Nagy');
+(3, 2, 'Zoltan21', 'ebbc3c26a34b609dc46f5c3378f96e08', 'Zoltan', 'Nagy'),
+(5, 1, 'nandor', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Dorritos', 'Michael');
 
 -- --------------------------------------------------------
 
@@ -358,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
   `w_type` tinyint(1) NOT NULL COMMENT '0 for Structural 1 for CFD',
   `w_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `worksheet`
@@ -369,7 +374,7 @@ INSERT INTO `worksheet` (`w_id`, `u_id`, `w_name`, `w_type`, `w_date`) VALUES
 (2, 1, 'Default_CFD', 2, '2014-03-07 20:16:57'),
 (3, 1, 'Default_Both', 3, '2014-03-07 20:17:18'),
 (4, 1, 'Worksheet test1', 2, '2014-03-08 21:46:43'),
-(6, 1, 'W1', 1, '2014-03-10 18:05:51');
+(11, 1, 'Worksheet Made last', 3, '2014-03-15 15:33:46');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

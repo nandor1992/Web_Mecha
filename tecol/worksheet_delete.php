@@ -16,13 +16,13 @@ $worksheet=$_POST['worksheet'];
 $sql="DELETE FROM `worksheet` WHERE w_id=".$worksheet;
 $result=mysql_query($sql) or die("cannot connect 2 ");
 
-$sql="DELETE FROM `answers_number` WHERE w_id=".$worksheet;
+$sql="DELETE FROM `answers` WHERE w_id=".$worksheet;
 $result=mysql_query($sql) or die("cannot connect 3 ");
 
-$sql="DELETE FROM `answers_text` WHERE w_id=".$worksheet;
+$sql="DELETE FROM `answers` WHERE w_id=".$worksheet;
 $result=mysql_query($sql) or die("cannot connect 4 ");
 
-$sql="DELETE FROM `answers_yn` WHERE w_id=".$worksheet;
+$sql="DELETE FROM `answers` WHERE w_id=".$worksheet;
 $result=mysql_query($sql) or die("cannot connect 5 ");
 
 header('Location: worksheet.php?error=1');

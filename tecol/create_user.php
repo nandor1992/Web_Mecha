@@ -4,6 +4,12 @@ if (!isset($_POST['username']))
 {
 header('Location: index.php?error=3');
 }
+if ((strlen($_POST['username'])<4)||(strlen($_POST['first_name'])<2)||(strlen($_POST['last_name'])<2)||(strlen($_POST['password'])<4))
+{
+header('Location: create.php?error=1');
+}
+else
+{
 include 'db_settings.php';
 $con = mysql_connect("localhost",$user,$password);
 if (!$con)
@@ -23,6 +29,5 @@ $_SESSION['username']=$first." ".$last;
 $_SESSION['id']=$username;
 header('Location: index.php?');
 }
-else
-echo "Error inserting into database, values might not be correct";
+}
 ?>

@@ -2,15 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 session_start();
+if (!isset($_SESSION['username'])||!isset($_SESSION['admin']))
+{
+header('Location: index.php?error=2');
+}
 if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
 {print "<script type=\"text/javascript\">";
-print "alert('Error,wrong username or passsword!')";
+print "alert('Text Modified')";
+print "</script>";   
+}
+if (isset($_REQUEST['error']) and $_REQUEST['error']==2) 
+{print "<script type=\"text/javascript\">";
+print "alert('Please enter Text to the specific are if you want to modify it')";
 print "</script>";   
 }
 ?>
 <head>
 <!--- Title goes here -->
-<title> TECoL - Login</title>
+<title> TECoL - Administrator Page</title>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
 <link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
@@ -50,7 +59,7 @@ print "</script>";
       <ul>
 	  <!--- Remember to do the Active stuff --->
         <li><a href="index.php" >Home</a></li>
-        <li><a href="about.php">About</a></li>
+        <li><a href="about.php" >About</a></li>
         <!-- Menu bar for admin and user --->
 		<?php
 		if(isset($_SESSION['username']))
@@ -58,7 +67,7 @@ print "</script>";
 		echo "<li><a href='worksheet.php'>Worksheet</a></li>";
         if (isset($_SESSION['admin']))
 		{
-		echo "<li><a href='admin.php'>Administrator</a></li>";
+		echo "<li><a href='admin.php' class='active'>Administrator</a></li>";
 		}
         }
 		?>
@@ -68,21 +77,53 @@ print "</script>";
     <div id="main">
 		<div class="highlight">
 		<!---- This is where it all begins -->
-          <form id='login' style='text-align:center' action='login_verify.php' method='post' accept-charset='UTF-8'>
-<fieldset >
-<legend>Login</legend>
-<input type='hidden' name='submitted' id='submitted' value='1'/>
- 
-<label for='username' >UserName:</label>
-<input type='text' name='username' id='username'  maxlength="50" />
- </br>
-<label for='password' >Password:</label>
-<input type='password' name='password' id='password' maxlength="50" />
- </br>
-<input type='submit' name='Submit' value='Submit' />
- 
-</fieldset>
-</form>
+		<div style='width:900px;float:left'>
+          <h3>Report Text Administration </h3>
+          <img src="css/images/highlight.gif" alt="" class="right" />
+		  <div style='width:900px;float:left;padding:10px'>
+		  <fieldset >
+				<legend style='font-size:15px'>Text List</legend>
+				<table style="width:890px;font-size:12px">
+					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
+						<th width="180px">Text ID</td>
+						<th >Name</td>
+						<th width="140px" >Operation</td>
+					</tr>
+					<?php
+					//initial db connection
+					include 'db_settings.php';
+					$con = mysql_connect("localhost",$user,$password);
+					if (!$con)
+					{
+					die('Could not connect: ' . mysql_error());
+					}
+					mysql_select_db($db_name,$con) or die ("Could not connect to database");
+					
+					//selecting users
+					
+					$q="SELECT * FROM `report_text`";
+					$result=mysql_query($q);
+					if (!$result) {
+						die('Invalid query: ' . mysql_error());
+							}
+					while($row = mysql_fetch_assoc($result))
+					{
+					{echo "<tr bgcolor='#92CD00' style='text-align:center'>";}
+					echo "<td>".$row['t_id']."</td>";
+					echo "<form style='text-align:center;float:left' method='post' action='admin_report_resolv.php'>";
+					echo "<td><input type='text' name='text' style='width:99%' value='".$row['text']."'/></td>";
+					echo "<td>
+							<input type='hidden' name='t_id' value='".$row['t_id']."'/>
+							<input type='submit' name='Submit' value='Save Changes' style='width:130px' />
+							</form>";
+					}
+					?>
+		</table> 
+			</fieldset>
+		  
+		  </div>
+		  </div>
+         
 		<!--- This is where it all ends --->  
 		</div>
 

@@ -17,6 +17,12 @@ if (isset($_REQUEST['error']) and $_REQUEST['error']==3)
 print "alert('Error,Invalid Page Acces')";
 print "</script>";   
 }
+
+if (isset($_REQUEST['error']) and $_REQUEST['error']==4) 
+{print "<script type=\"text/javascript\">";
+print "alert('404 Error, page not found')";
+print "</script>";   
+}
 ?>
 <head>
 <!--- Title goes here -->
@@ -93,7 +99,7 @@ print "</script>";
   </div>
   <div id="footer">
     <p class='left'>Copyright &copy; 2014, UTC-N Cluj Napoca, All Rights Reserved</p>
-    <p class='right'>Made by: Iza Birs, Zoltán Nagy, Nándor Verba</p>
+    <p class='right'>Made by: Isabela Bîrs, Zoltán Nagy, Nándor Verba</p>
     <div class='cl'></div>
   </div>
 </div>

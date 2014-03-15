@@ -2,24 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 session_start();
-if (!isset($_SESSION['username']))
+if (!isset($_SESSION['username'])||!isset($_SESSION['admin']))
 {
-header('Location: index.php?error=1');
+header('Location: index.php?error=2');
 }
+
 if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
 {print "<script type=\"text/javascript\">";
-print "alert('Worksheet and all saved Responses Deleted!')";
+print "alert('Please Complete all the fields')";
 print "</script>";   
 }
 if (isset($_REQUEST['error']) and $_REQUEST['error']==2) 
 {print "<script type=\"text/javascript\">";
-print "alert('Worksheet created!')";
+print "alert('Question Successfully Added')";
 print "</script>";   
 }
+if (isset($_REQUEST['error']) and $_REQUEST['error']==3) 
+{print "<script type=\"text/javascript\">";
+print "alert('Variable Succesfully added')";
+print "</script>";   
+}
+
+
 ?>
 <head>
 <!--- Title goes here -->
-<title> TECoL - Worksheet </title>
+<title> TECoL - Administrator Page</title>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
 <link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
@@ -64,10 +72,10 @@ print "</script>";
 		<?php
 		if(isset($_SESSION['username']))
 		{
-		echo "<li><a href='worksheet.php' class='active'>Worksheet</a></li>";
+		echo "<li><a href='worksheet.php'>Worksheet</a></li>";
         if (isset($_SESSION['admin']))
 		{
-		echo "<li><a href='admin.php'>Administrator</a></li>";
+		echo "<li><a href='admin.php' class='active'>Administrator</a></li>";
 		}
         }
 		?>
@@ -78,76 +86,71 @@ print "</script>";
 		<div class="highlight">
 		<!---- This is where it all begins -->
 		<div style='width:900px;float:left'>
-          <h3> Worksheet </h3>
+          <h3> Question and Variable management page </h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:900px;float:left;padding:10px'>
-          <?php
-		  // Querry for worksheet entries
-		  include 'db_settings.php';
-$con = mysql_connect("localhost",$user,$password);
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
-mysql_select_db($db_name,$con) or die ("Could not connect to database");
-$id=$_SESSION['id'];
-$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id' )";
-$i=0;//for array length		  
-$result=mysql_query($sql) or die("cannot connect 2 ");
-    while($row = mysql_fetch_array($result)) {
-	$i++;//for array length TO-DO smarter
-		  //for --while
-		  echo "
-		  <div style='width:280px;height:100px;float:left;padding:5px;border-width:2px;background-color:#d3d3d3; border-style: outset; border-color: gray;'>
-		  <p>";
-		  echo "Worksheet ".$i;
-		  echo"</p>
-		  <b>";
-		  echo $row['w_name']."</b>";
-		  switch ($row['w_type'])
-		  {
-		  case 1:$type=" Structural";break;
-		  case 2:$type=" CFD";break;
-		  case 3:$type=" Combined";break;
-		  }
-		  echo "<p>Worksheet type:".$type."</p>";
-		  echo "
-		  <form action='worksheet_detailed.php' method='post' style='float:left;padding-right:5px'>
-		  <input type='hidden' name='worksheet' id='worksheet' value=".$row['w_id'].">
-		  <input type='submit' name='Submit' value='Manage' />
-		  </form>
-		  <form action='worksheet_delete.php' method='post' style='float:left' onSubmit=\"if(!confirm('Are you sure you want to delete the Worksheet?')){return false;}\">
-		  <input type='hidden' name='worksheet' id='worksheet' value=".$row['w_id'].">
-		  <input type='submit' name='Submit' value='Delete' />
-		  </form>
-		  <p  style='text-align:right;float:right' >";
-		  echo $row['w_date'];
-		  echo "</p>
-		  </div>";}
-		  // Echoing new sheet if neccesary
-		  if($i<5)
-		  {echo "
-		  <div style='width:280px;height:100px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;'>
-		  <b>Create New Worksheet !</b>
 		  
-		  <form action='worksheet_create.php' method='post' >
-		  <p> Insert Worksheet name and select type: </p>
-		  <input type='text' name='w_name' id='w_name'  maxlength='30' style='width:130;float:left'>
-		  <select name='w_type' style='width:130;float:left'>
+		  <form id='question' style='text-align:center' action='admin_questions_resolve.php' method='post' accept-charset='UTF-8'>
+			<fieldset >
+			<legend>Question Addition </legend>
+			</br>
+			<p style='float:left'>&nbsp Question Text:&nbsp </p>
+			<input type='text' name='question' id='question'  maxlength='1000' style='width:540px;float:left'>	 
+			<p style='float:left'> &nbspQuestion Type: &nbsp</p>
+			<select name='w_type' style='width:130;float:left'>
 				<option value='1'>Structured</option>
 				<option value='2'>CFD</option>
 				<option value='3'>Combined</option>
 		  </select>
-		  <input type='submit' name='Submit' value='Create' style='width:130px;float:right' />
-		  </form>
-		  </div>";
-		  }
-		  ?>
-		  </div >
-		  <div style='width:900px;paddig:10px'>
+			<input type='submit' name='Submit' value='Save Question' style='float:right' />
+			</br></br>
+			</fieldset>
+		   </form>
+		   
+		   <form id='question' style='text-align:left' action='admin_questions_resolve.php' method='post' accept-charset='UTF-8'>
+			<fieldset >
+			<legend>Variable addition </legend>
+			</br>
+			<p style='float:left'>Variable Name:&nbsp </p>
+			<input type='text' name='q_name' id='q_name'  maxlength='30' style='width:100px;float:left'/>	 	 
+					  <p style='float:left'> &nbsp Variable Type: &nbsp </p>
+			<select name='v_type' style='width:130;float:left'>
+				<option value='2'>Text(2000 char)</option>
+				<option value='3'>Big Integer</option>
+				<option value='4'>Boolean-Req Answer</option>
+				<option value='5'>Boolean-Answer nor Req</option>
+				<option value='6'>Percentage</option>
+				<option value='7'>Percentage under 100%</option>
+		  </select>
+		  <p style='float:left'>&nbsp Variable Text:&nbsp </p>
+			<input type='text' name='q_text' id='q_text'  maxlength='1000' style='width:350px;float:left'/>
+					  </br></br>
+			<p style='float:left'>Connected Question: &nbsp</p>
+			<select name='q_type' style='width:670px;float:left'>
+				<?php
+				include 'db_settings.php';
+				$con = mysql_connect("localhost",$user,$password);
+					if (!$con)
+					{
+					die('Could not connect: ' . mysql_error());
+						}
+					mysql_select_db($db_name,$con) or die ("Could not connect to database");
+				$sql="SELECT * FROM `questions`";
+				$result=mysql_query($sql) or die("cannot connect 3 ");
+				while($row=mysql_fetch_assoc($result))
+				{
+				echo "<option value='".$row['q_id']."'>".$row['question']."</option>";
+				}
+				?>
+		  </select>
+			<input type='submit' name='Submit' value='Save Variable' style='float:right'>
+			</br></br>
+			</fieldset>
+		   </form>
 		  
-	</div>
-</div>	
+		  </div>
+		  </div>
+         
 		<!--- This is where it all ends --->  
 		</div>
 

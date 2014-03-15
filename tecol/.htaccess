@@ -1,0 +1,1 @@
+ErrorDocument 404 /tecol/index.php?error=4

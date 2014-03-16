@@ -28,6 +28,7 @@ $num_results = mysql_num_rows($result);
 if ($num_results > 0){
 $_SESSION['username']=$row['first_name']." ".$row['last_name'];
 $_SESSION['id']=$username;
+$_SESSION['u_id']=$row['u_id'];
 if ($row['u_type']==2)
 {
 $_SESSION['admin']=1;

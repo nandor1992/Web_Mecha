@@ -5,6 +5,7 @@
 //$answer=$_POST['answer'][$i]
 //$answer_nr=$_POST['n'];
 $validation=true;
+
 //this part checks if it is in the right syntax- number or text
 for ($i=0;$i<$_POST['n'];$i++)
 {

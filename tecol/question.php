@@ -6,14 +6,6 @@
 include 'db_settings.php';
 session_start();
 
-//this is here just for testing, to see if there is any problem or not, will be deleted
-echo "<p>Username: ".$_SESSION['username']."</p>";
-echo "<p>Username ID: ".$_SESSION['id']."</p>";
-echo "<p> User id: ".$_SESSION['u_id']."</p>";
-echo "<p>Question_id: ".$_POST['question']."</p>";
-echo "<p>Country_id: ".$_POST['country']."Country id can be empty</p>";
-echo "<p>Worksheet_id: ".$_POST['worksheet']."</p>";
-
 //connecting to the database, it is here because it will be used everywhere
 $con = mysql_connect("localhost",$user,$password);
 if (!$con)
@@ -21,19 +13,20 @@ if (!$con)
   die('Could not connect: ' . mysql_error());
   }
 mysql_select_db($db_name,$con) or die ("Could not connect to database");
-$check=0;
+
 //this is the most important variable, will be used all along 
 $question_id = $_POST['question'];
+
 //validation procedure, Next= not save, not skip, unanswered
 if (isset($_POST['Next']))
 {
 	switch($_POST['worksheet'])
 	{
-		case 1: 	if ($question_id<18)
+		case 0: 	if ($question_id<18)
 						$question_id++;
 					break;
-		case 2:
-		case 3: 	if ($question_id<51)
+		case 1:
+		case 2: 	if ($question_id<51)
 						$question_id++;
 					break;
 	}
@@ -42,8 +35,8 @@ if (isset($_POST['Next']))
 	{
 		switch($_POST['worksheet'])
 		{
-			case 1:
-			case 3: 	if ($question_id<18)
+			case 0:
+			case 2: 	if ($question_id<18)
 						{
 							$question_id++;
 							include 'is_skipped.php';
@@ -55,14 +48,14 @@ if (isset($_POST['Next']))
 						}
 							
 						break;
-			case 2: 	if ($question_id<51)
+			case 1: 	if ($question_id<51)
 							$question_id++;
 						else
 							header('Location: worksheet.php?error=4');
 							$check=1;
 						break;
 		}
-		if ($check==1)
+		if (check==1)
 		{
 			break;
 		}
@@ -74,11 +67,11 @@ if (isset($_POST['Previous']))
 {
 	switch($_POST['worksheet'])
 	{
-		case 1:
-		case 3: 	if ($question_id>1)
+		case 0:
+		case 2: 	if ($question_id>1)
 						$question_id--;							
 					break;
-		case 2: 	if ($question_id>18)
+		case 1: 	if ($question_id>18)
 						$question_id--;
 					break;
 	}
@@ -87,8 +80,8 @@ if (isset($_POST['Previous']))
 	{
 		switch($_POST['worksheet'])
 		{
-			case 1:
-			case 3: 	if ($question_id>1)
+			case 0:
+			case 2: 	if ($question_id>1)
 						{
 							$question_id--;
 							echo $question_id;
@@ -101,7 +94,7 @@ if (isset($_POST['Previous']))
 						}
 							
 						break;
-			case 2: 	if ($question_id>18)
+			case 1: 	if ($question_id>18)
 							$question_id--;
 						else
 						{
@@ -141,8 +134,8 @@ if (isset($_POST['Skip']))
 		while ($row = mysql_fetch_assoc($vars))
 		{	
 			$var_id=$row['var_id'];
-			$sql="INSERT INTO answers(q_id, w_id, var_id, skip)
-			VALUES ($question_id,'$_POST[worksheet]','$var_id',1)";
+			$sql="INSERT INTO answers(q_id, u_id, w_id, var_id, skip)
+			VALUES ($question_id,'$_SESSION[u_id]','$_POST[worksheet]','$var_id',1)";
 			mysql_query($sql); 
 			 //mysql_error();
 		}
@@ -176,8 +169,8 @@ if (isset($_POST['Save']) and ($validation==true))
 			echo "<p> answer: ".$_POST['answer'][$i]."</p>";
 			$answer=$_POST['answer'][$i];
 			$var_id=$row['var_id'];
-			$sql="INSERT INTO answers(q_id, w_id, var_id, skip, answer)
-			VALUES ($question_id,'$_POST[worksheet]','$var_id',0,'$answer')";
+			$sql="INSERT INTO answers(q_id, u_id, w_id, var_id, skip, answer)
+			VALUES ($question_id,'$_SESSION[u_id]','$_POST[worksheet]','$var_id',0,'$answer')";
 			mysql_query($sql); 
 			
 			 //mysql_error();
@@ -283,26 +276,26 @@ if (isset($_POST['Save']) and ($validation==true))
 	    die('Invalid query: ' . mysql_error());
 	}
 
-	$i=0;
+	$i=-1;
 	$num_results = mysql_num_rows($variables);
 	if (mysql_num_rows($variables) > 0) 
 	{
 		while ($row = mysql_fetch_assoc($variables))
 		{
 
-			//storing all the dta into a vector			
+			//storing all the dta into a vector
+			$i++;			
 			$var_name[$i]=$row['var_name'];
 			$var_text[$i]=$row['var_text'];
 			$var_type[$i]=$row['var_type'];
-			$i++;
 
 		}
 	}
 	$n=$i;
-
+	$n++;
 //to print out the forms
 	echo "<div style='background-color:#FFA500;clear:both;text-align:center;'>
-		<p color:red; text-align:center; > ".$var_text[$i-1]."</p>
+		<p color:red; text-align:center; > ".$var_text[$i]."</p>
 		</div>";
 	echo "<form name='input' action='question.php' method='post' style='text-align:center'><br>";
 	for($i=0;$i<$n;$i++)
@@ -346,13 +339,14 @@ if (isset($_POST['Save']) and ($validation==true))
 	//it is necessary because if it reaches the first than it cannot go to the previous
 		  switch($_POST['worksheet'])
 			{
-				case 1:
-				case 3: 	if ($question_id!=1)
+				case 0:
+				case 2: 	if ($question_id!=1)
 								echo "<input type='submit' name='Previous' value='Previous' style='float:left' />";
 							break;
-				case 2: 	if ($question_id!=18)
+				case 1: 	if ($question_id!=18)
 								echo "<input type='submit' name='Previous' value='Previous' style='float:left' />";
 							break;
+				default : echo "errrorr at the switch  ".$_POST['worksheet'];
 			}
 
 		  if (!isset($validation))
@@ -370,11 +364,11 @@ if (isset($_POST['Save']) and ($validation==true))
 		  }
 		  switch($_POST['worksheet'])
 			{
-				case 1: 	if ($question_id!=18)
+				case 0: 	if ($question_id!=18)
 								echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
 							break;
-				case 2:
-				case 3: 	if ($question_id!=51)
+				case 1:
+				case 2: 	if ($question_id!=51)
 								echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
 							break;
 			}

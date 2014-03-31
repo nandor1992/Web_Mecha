@@ -3,14 +3,13 @@
 
 //variables
 $unskipped=true;
-
 $u_id=$_SESSION['u_id'];
 $w_id=$_POST['worksheet'];
 $sql_var="SELECT * 
 			FROM answers 
-			WHERE q_id LIKE '{$question_id}' AND u_id LIKE '{$u_id}' AND w_id LIKE '{$w_id}'
+			WHERE q_id LIKE '{$question_id}'  AND w_id LIKE '{$w_id}'
 			";
-$vars=mysql_query($sql_var);
+$vars=mysql_query($sql_var) or die ("I died");
 
 if (!$vars) 
 {
@@ -23,9 +22,18 @@ if (mysql_num_rows($vars) > 0)
 		if ($row['skip']==1)
 		{
 			$unskipped=false;
+			$unanswered=false;
 			break;
 		}
+		else
+		{
+			$unanswered=false;
+		}
 	}
-}	
+}
+else
+{
+	$unanswered=true;
+}
 
 ?>

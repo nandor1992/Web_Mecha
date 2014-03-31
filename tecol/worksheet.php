@@ -148,7 +148,7 @@ $result=mysql_query($sql) or die("cannot connect 2 ");
 		  
 	</div>
 </div>	
-		<!--- This is where it all ends --->  
+		<!--- This is where it all ends -->  
 		</div>
 
       <div class="cl">&nbsp;</div>

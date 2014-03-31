@@ -28,4 +28,6 @@ $result=mysql_query($sql) or die("error at results");
 
 header('Location: worksheet.php?error=2');
 
+$_SESSION['w_type']=$w_type;
+
 ?>

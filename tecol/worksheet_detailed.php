@@ -91,6 +91,7 @@ header('Location: index.php?error=1');
 			$w_name=$row['w_name'];
 			$w_id=$row['w_id'];
 			$w_type=$row['w_type'];
+			$_SESSION['w_type']=$w_type; //it is neccessary to be in session to know the type!
 		?>
           <h2 style='text-align:center;font-size:18px'>&nbsp<?php echo $row['w_name']?>&nbsp - Detailed View </h2>
 		  <h2 style='text-align:center;font-size:15px'>Worksheet type: 

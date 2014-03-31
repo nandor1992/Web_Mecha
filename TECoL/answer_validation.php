@@ -1,9 +1,6 @@
 <?php
 //validation part- check if the input is correct or not
-//neccessary variables- $var_type
 
-//$answer=$_POST['answer'][$i]
-//$answer_nr=$_POST['n'];
 $validation=true;
 
 //this part checks if it is in the right syntax- number or text
@@ -26,8 +23,32 @@ for ($i=0;$i<$_POST['n'];$i++)
 				} 
 				break;
 		case 4:
-		case 1:
 		case 5: if (empty($answer))
+				{
+					print "<script type=\"text/javascript\">";
+					print "alert('Error, you must enter a value!')";
+					print "</script>"; 
+					$validation=false;
+					break;
+				}
+				else //becuse if it is a yes than the next field has to be filled 
+				{
+					if ($answer=="yes")
+					{
+						$i++;
+						$answer1=$_POST['answer'][$i];
+						if (empty($answer1))
+						{
+							print "<script type=\"text/javascript\">";
+							print "alert('Error, you must specify your answer!')";
+							print "</script>"; 
+							$validation=false;
+							break;
+						}
+					}
+				}
+				break;
+		case 1: if (empty($answer))
 				{
 					print "<script type=\"text/javascript\">";
 					print "alert('Error, you must enter a value!')";
@@ -42,7 +63,7 @@ for ($i=0;$i<$_POST['n'];$i++)
 }
 
 //the 7th case has to be treated separately
-//previously it was checked to be a numeric value, here it is checked if it is in the right order and less than 100% 
+//previously it was checked if it is a numeric value, here it is checked if it is in the right order and less than 100% 
 //because it has to be less than $n
 $i--;
 if (($_POST['var_type'][$i]==7) and ($validation==true))

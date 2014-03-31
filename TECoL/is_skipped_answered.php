@@ -1,15 +1,12 @@
 <?php
-//is skipped or not?
+//is skipped? is answered?
 
 //variables
 $unskipped=true;
 $u_id=$_SESSION['u_id'];
 $w_id=$_POST['worksheet'];
-$sql_var="SELECT * 
-			FROM answers 
-			WHERE q_id LIKE '{$question_id}'  AND w_id LIKE '{$w_id}'
-			";
-$vars=mysql_query($sql_var) or die ("I died");
+$sql_var="SELECT * FROM answers	WHERE q_id LIKE '{$question_id}'  AND w_id LIKE '{$w_id}'";
+$vars=mysql_query($sql_var) or die ("I died ");
 
 if (!$vars) 
 {

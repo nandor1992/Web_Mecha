@@ -28,7 +28,7 @@ $row2 = mysql_fetch_assoc($result2);
 if(isset($row2['a_id']))
 {
 echo "Update";
-$sql="UPDATE `answers` SET `skip`=1 WHERE `a_id`=".$row2['a_id'];
+$sql="UPDATE `answers` SET `skip`=1,`answer`='' WHERE `a_id`=".$row2['a_id'];
 $result2=mysql_query($sql) or die("cannot connect 4 ");
 }
 else

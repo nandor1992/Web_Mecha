@@ -147,7 +147,7 @@ if (isset($_POST['Save']) and ($validation==true))
 
 		echo "clear:both;text-align:center;'>
 		<br><div style='border: solid 1px white;font-size:18px';>
-			<p text-align:center; > ".$question_id.": ".$question_aux."</p></div>";
+			<p text-align:center; > ".questionNumber($question_id,$w_type).": ".$question_aux."</p></div>";
 	}
 	// to get the variables: type, text, name
 	$variable_sql="SELECT * FROM variable WHERE q_id LIKE '{$question_id}'";

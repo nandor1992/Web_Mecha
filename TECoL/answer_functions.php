@@ -225,5 +225,21 @@ function saveAnswer($question_id, $worksheet_id, $status)
 		mysql_query($sql); 
 	}
 }
+function fillTextFieldWithAnswer($question_id, $worksheet_id)
+{
+	//it fills the text area/ text filled with the answer if it is filled
 
+}
+
+function questionNumber($question_id, $w_type)
+{
+	include "question_limits.php";
+	$q_nr=$question_id;
+
+	if (($w_type==2) AND ($question_id!=2) AND ($question_id!=1))
+	{
+		$q_nr=$question_id-$str_upper_limit+2;
+	}
+	return $q_nr;
+}
 ?>

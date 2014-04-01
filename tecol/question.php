@@ -138,8 +138,6 @@ if (isset($_POST['Save']) and ($validation==true))
 //if everything is OKAY than it will show the question, with number
 		echo "<div style='";
 		//the color of the question, using this answerStatus function
-		include 'is_skipped_answered.php';
-
 		switch(answerStatus($question_id,$w_id)) 
 		{
 			case 1: echo "background-color:#E86850;"; break;

@@ -4,6 +4,7 @@
 <?php
 include 'db_settings.php';
 include 'question_limits.php';
+include 'answer_functions.php'; // contains a function which returns the state of an answer
 session_start();
 
 //this is here just for testing, to see if there is any problem or not, will be deleted
@@ -31,123 +32,18 @@ $w_type=$_SESSION['w_type'];// this is necesssary to know which type is used
 //validation procedure, Next= not save, not skip, unanswered
 if (isset($_POST['Next']))
 {
-	//first it goes to the next question
-	switch($w_type)
-	{
-		case 1: 	if ($question_id<$str_upper_limit)
-						$question_id++;
-					break;
-		case 2:		
-		case 3: 	if ($question_id<$cfd_upper_limit)
-						$question_id++;
-					break;
-	}
-	//it check if it was skipped
-	include 'is_skipped_answered.php';
-
-	while($unskipped==false)//it goes while it gets a value which is not skipped
-	{
-		switch($w_type)
-		{
-			case 1:
-					 	if ($question_id<$str_upper_limit)
-						{
-							$question_id++;
-							include 'is_skipped_answered.php';
-						}
-						else
-						{
-							header('Location: worksheet.php?error=4');
-							$check=1;
-						}
-							
-						break;
-			case 2:
-			case 3: 	if ($question_id<$cfd_upper_limit)
-							$question_id++;
-						else
-							header('Location: worksheet.php?error=4');
-							$check=1;
-						break;
-		}
-		if ($check==1)
-		{
-			break;
-		}
-	}
+	$question_id=onClickNext($question_id,$w_id,$w_type);
 }
 //validation procedure, Previous= not save, not skip, unanswered
 if (isset($_POST['Previous']))
 {
-	switch($w_type)
-	{
-		case 1:
-		case 3: 	if ($question_id>$str_down_limit)
-						$question_id--;							
-					break;
-		case 2: 	if ($question_id>$cfd_down_limit)
-						$question_id--;
-					break;
-	}
-	include 'is_skipped_answered.php';
-	while($unskipped==false)
-	{
-		switch($w_type)
-		{
-			case 1:
-			case 3: 	if ($question_id>$str_down_limit)
-						{
-							$question_id--;
-							echo $question_id;
-							include 'is_skipped_answered.php';
-						}
-						else
-						{
-							header('Location: worksheet.php?error=4');
-							$check=1;
-						}
-							
-						break;
-			case 2: 	if ($question_id>$cfd_down_limit)
-							$question_id--;
-						else
-						{
-							header('Location: worksheet.php?error=4');
-							$check=1;
-						}
-						break;
-		}
-		if ($check==1)
-		{
-			break;
-		}
-
-	}
+	$question_id=onClickPrevious($question_id,$w_id,$w_type);
 }
 
-// setting the skip value 1--skipped 0--unskipped
+// setting the skip value in the database 1--skipped 0--unskipped
 if (isset($_POST['Skip']))
 {
-	//it has to select the belonging variables for that question
-	$sql_var="SELECT var_id 
-			FROM variable 
-			WHERE q_id LIKE '{$question_id}'
-			";
-	$vars=mysql_query($sql_var);
-
-	if (!$vars) 
-	{
-	    die('Invalid query: ' . mysql_error());
-	}
-
-	while ($row = mysql_fetch_assoc($vars))
-	{	
-		//inserting 'skipped' to every variable!
-		$var_id=$row['var_id'];
-		$sql="INSERT INTO answers(q_id, w_id, var_id, skip)
-		VALUES ($question_id,'$_POST[worksheet]','$var_id',1)";
-		mysql_query($sql); 
-	}	
+	saveAnswer($question_id,$w_id,1);//last argument 1==skipped
 }
 // it doesn't need to check the validation when it clicks on the Next, Previous or Skip buttons
 
@@ -157,34 +53,7 @@ if (isset($_POST['n']) and !isset($_POST['Next']) and !isset($_POST['Previous'])
 }
 if (isset($_POST['Save']) and ($validation==true))
 {
-	include 'is_skipped_answered.php';// it returns 2 type of variable $unanswered and $unskipped
-	if ($unanswered==false) // if it is already answered than delete
-	{
-		$sql_var="DELETE FROM `answers` WHERE q_id='$question_id' AND w_id='$w_id'";
-		$result=mysql_query($sql_var) or die("cannot connect 2 ");
-	}
-	//inserting the new values into the database
-	$sql_var="SELECT * FROM variable WHERE q_id LIKE '{$question_id}'";
-	$vars=mysql_query($sql_var);
-	if (!$vars) 
-	{
-	    die('Invalid query: ' . mysql_error());
-	}
-	if (mysql_num_rows($vars) > 0) 
-	{
-		//echo"eRROR there is a problem with the selected rows";
-		$i=-1;
-		while ($row = mysql_fetch_assoc($vars))
-		{
-			$i++;
-			echo "<p> answer: ".$_POST['answer'][$i]."</p>";
-			$answer=$_POST['answer'][$i];
-			$var_id=$row['var_id'];
-			$sql="INSERT INTO answers(q_id, w_id, var_id, skip, answer)
-			VALUES ($question_id,'$_POST[worksheet]','$var_id',0,'$answer')";
-			mysql_query($sql); 
-		}
-	}
+	saveAnswer($question_id,$w_id,0); //last argument 0==answered
 }
 //the end of the php header -- it handles all the situations
 ?>
@@ -268,23 +137,16 @@ if (isset($_POST['Save']) and ($validation==true))
 	{
 //if everything is OKAY than it will show the question, with number
 		echo "<div style='";
-		//the color of the question, using this .php file
+		//the color of the question, using this answerStatus function
 		include 'is_skipped_answered.php';
-		if ($unanswered==true)
+
+		switch(answerStatus($question_id,$w_id)) 
 		{
-			echo "background-color:#C0C0C0;";
+			case 1: echo "background-color:#E86850;"; break;
+			case 2: echo "background-color:#92CD00;"; break;
+			case 3: echo "background-color:#C0C0C0;"; break;
 		}
-		else
-		{
-			if ($unskipped==true)//is answered
-			{
-				echo "background-color:#92CD00;";
-			}
-			else //is skipped
-			{
-				echo "background-color:#E86850;";
-			}
-		}
+
 		echo "clear:both;text-align:center;'>
 		<br><div style='border: solid 1px white;font-size:18px';>
 			<p text-align:center; > ".$question_id.": ".$question_aux."</p></div>";
@@ -380,7 +242,7 @@ if (isset($_POST['Save']) and ($validation==true))
 				case 3: 	if ($question_id!=$str_down_limit)
 								echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
 							break;
-				case 2: 	if ($question_id!=$cfd_down_limit)
+				case 2: 	if ($question_id!=$str_down_limit)//because it contains the first 2 question
 								echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
 							break;
 			}
@@ -390,7 +252,7 @@ if (isset($_POST['Save']) and ($validation==true))
 				case 1: 	if ($question_id!=$str_upper_limit)
 								echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
 							break;
-				case 2:
+				case 2:	
 				case 3: 	if ($question_id!=$cfd_upper_limit)
 								echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
 							break;

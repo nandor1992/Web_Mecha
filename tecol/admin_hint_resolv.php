@@ -5,7 +5,13 @@ if (!isset($_POST['Submit']))
 {
 header('Location: index.php?error=3');
 }
-
+if ($_POST['Submit']=='Display')
+{
+$_SESSION['hint']=$_POST['w_type'];
+header('Location: admin_hints.php');
+}
+else
+{
 $con = mysql_connect("localhost",$user,$password);
 if (!$con)
   {
@@ -25,5 +31,5 @@ $sql="INSERT INTO `hint` ( `q_id`, `country_id`, `hint`) VALUES ('".$_POST['q_id
 $result=mysql_query($sql) or die("cannot connect This time ");
 }
 header('Location: admin_hints.php?error=1');
-
+}
 ?>

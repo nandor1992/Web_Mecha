@@ -1,10 +1,12 @@
 <?php
 session_start();
 
-if (!isset($_POST['w_name']))
+if ((!isset($_POST['w_name']))||(strlen($_POST['w_name'])<3))
 {
-header('Location: index.php?error=3');
+header('Location: worksheet.php?error=3');
 }
+else
+{
 include 'db_settings.php';
 $con = mysql_connect("localhost",$user,$password);
 if (!$con)
@@ -27,7 +29,8 @@ $sql="INSERT INTO `worksheet`(`u_id`, `w_name`, `w_type`) VALUES ($u_id,'$w_name
 $result=mysql_query($sql) or die("error at results");
 
 header('Location: worksheet.php?error=2');
+//Useless ??
+//$_SESSION['w_type']=$w_type;
 
-$_SESSION['w_type']=$w_type;
-
+}
 ?>

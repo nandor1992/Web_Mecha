@@ -81,7 +81,7 @@ print "</script>";
           <h3>Hint Text Administration </h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:900px;float:left;padding:10px'>
-		  <form style='text-align:center' method='post' action='admin_hints.php'>
+		  <form style='text-align:center' method='post' action='admin_hint_resolv.php'>
 		  <?php
 					//initial db connection
 					include 'db_settings.php';
@@ -106,7 +106,13 @@ print "</script>";
 								<?php
 								while($row = mysql_fetch_assoc($result))
 								{
+								if ((isset($_SESSION['hint']))&&($_SESSION['hint']==$row['q_id'])){
+								echo "<option selected value='".$row['q_id']."' >".$row['country']."</option>";
+								}
+								else
+								{
 								echo "<option value='".$row['q_id']."' >".$row['country']."</option>";
+								}
 								}
 								?>
 							</select>
@@ -115,9 +121,6 @@ print "</script>";
 		  <fieldset >
 		  <legend style='font-size:15px'>Question List</legend>
 		  <?php
-		  if (isset($_SESSION['hint'])){
-		  $_SESSION['hint']=$_SESSION['hint'];
-		  }
 		   if (isset($_SESSION['hint'])){
 		  echo"
 				<table style='width:890px;font-size:12px'>

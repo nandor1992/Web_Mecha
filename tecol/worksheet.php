@@ -16,6 +16,11 @@ if (isset($_REQUEST['error']) and $_REQUEST['error']==2)
 print "alert('Worksheet created!')";
 print "</script>";   
 }
+if (isset($_REQUEST['error']) and $_REQUEST['error']==3) 
+{print "<script type=\"text/javascript\">";
+print "alert('Please enter a Worksheet name that is longer then 2 Characters!')";
+print "</script>";   
+}
 ?>
 <head>
 <!--- Title goes here -->

@@ -9,7 +9,7 @@ header('Location: index.php?error=2');
 
 if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
 {print "<script type=\"text/javascript\">";
-print "alert('Please Complete all the fields')";
+print "alert('Please complete all fields!')";
 print "</script>";   
 }
 if (isset($_REQUEST['error']) and $_REQUEST['error']==2) 
@@ -20,6 +20,16 @@ print "</script>";
 if (isset($_REQUEST['error']) and $_REQUEST['error']==3) 
 {print "<script type=\"text/javascript\">";
 print "alert('Variable Succesfully added')";
+print "</script>";   
+}
+if (isset($_REQUEST['error']) and $_REQUEST['error']==4) 
+{print "<script type=\"text/javascript\">";
+print "alert('Question Succesfully Modified')";
+print "</script>";   
+}
+if (isset($_REQUEST['error']) and $_REQUEST['error']==5) 
+{print "<script type=\"text/javascript\">";
+print "alert('Variable Succesfully Modified')";
 print "</script>";   
 }
 
@@ -146,9 +156,83 @@ print "</script>";
 			<input type='submit' name='Submit' value='Save Variable' style='float:right'>
 			</br></br>
 			</fieldset>
-		   </form>
-		  
+			<fieldset>
+			<legend>List of Questions and Variables </legend>
+			<!---Displayling allquestions and variables ----->
+			<table style="width:890px;font-size:12px">
+					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
+						<th width="100px">Question.VarID</th>
+						<th width="80px">Type</th>
+						<th >Question Text</th>
+						<th width="140px" >Operation</th>
+					</tr>
+			<?php
+			$q="SELECT * FROM `questions`";
+					$result=mysql_query($q);
+					if (!$result) {
+						die('Invalid query: ' . mysql_error());
+							}
+					while($row = mysql_fetch_assoc($result))
+					{
+					echo "<tr bgcolor='#92CD00' style='text-align:center'>";
+					echo "<td>".$row['q_id']."</td>";
+					switch($row['w_type'])
+					{
+					case 0:echo "<td> Base </td> ";break;
+					case 1:echo "<td> Structured </td>";break;
+					case 2:echo "<td> CFD </td>";break;
+					}
+					echo "<form style='text-align:center;float:left' method='post' action='admin_questions_resolve.php'>";
+					echo "<td><input type='text' name='text' style='width:99%' value='".$row['question']."'/></td>";
+					echo "<td>
+							<input type='hidden' name='q_id' value='".$row['q_id']."'/>
+							<input type='submit' name='Submit' value='Modify Question' style='width:130px' />
+							</form></td>";
+							//Basic form for variables
+					$q2="SELECT * FROM `variable` WHERE `q_id`='".$row['q_id']."'";
+					$result2=mysql_query($q2);
+					if (!$result2) {
+						die('Invalid query: ' . mysql_error());
+							}
+					while($row2 = mysql_fetch_assoc($result2))
+					{		
+					echo "<tr bgcolor='#C0C0C0' style='text-align:center'>";
+					echo "<td>".$row['q_id'].".".$row2['var_name']."</td>";
+					switch($row2['var_type'])
+					{
+					case 1:echo "<td> Country ID </td> ";break;
+					case 2:echo "<td> Text </td>";break;
+					case 3:echo "<td> BigInt </td>";break;
+					case 4:echo "<td> Bool Req Ans</td>";break;
+					case 5:echo "<td> Bool No Ans </td>";break;
+					case 6:echo "<td> Percentage </td>";break;
+					case 7:echo "<td> Percentage<100% </td>";break;
+					}
+					echo "<form style='text-align:center;float:left' method='post' action='admin_questions_resolve.php'>";
+					echo "<td><input type='text' name='text' style='width:99%' value='".$row2['var_text']."'/></td>";
+					echo "<td>
+							<input type='hidden' name='var_id' value='".$row2['var_id']."'/>
+							<input type='submit' name='Submit' value='Modify Variable' style='width:130px' />
+							</form></td>";
+					}
+					}
+					?>
+					</table> 
+					</fieldset>
+			
+			
+		   
+		   <div style='text-align:center;width:300px;float:right'>
+				<table style="width:300px;font-size:10px">
+					<tr >
+						<td bgcolor='#C0C0C0'>&nbsp&nbsp</td>
+						<td>- Variables</td>
+						<td bgcolor='#92CD00'>&nbsp&nbsp</td>
+						<td>- Questions</td>
+					</tr>
+		</table> 
 		  </div>
+		  </fieldset>
 		  </div>
          
 		<!--- This is where it all ends --->  

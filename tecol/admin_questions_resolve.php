@@ -38,5 +38,29 @@ header('Location: admin_questions.php?error=3');
 }
 break;
 
+case 'Modify Question':
+if (strlen($_POST['text'])<3)
+{
+header('Location: admin_questions.php?error=1');
+}
+else{
+$sql="UPDATE `questions` SET `question`='".$_POST['text']."' WHERE `q_id`='".$_POST['q_id']."'";
+$result=mysql_query($sql) or die("cannot connect 4 ");
+header('Location: admin_questions.php?error=4');
+}
+break;
+
+case 'Modify Variable':
+if (strlen($_POST['text'])<3)
+{
+header('Location: admin_questions.php?error=1');
+}
+else{
+$sql="UPDATE `variable` SET `var_text`='".$_POST['text']."' WHERE `var_id`='".$_POST['var_id']."'";
+$result=mysql_query($sql) or die("cannot connect 5 ");
+header('Location: admin_questions.php?error=5');
+}
+break;
+
 }
 ?>

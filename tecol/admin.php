@@ -100,7 +100,7 @@ header('Location: index.php?error=2');
 			<input type='submit' name='Submit' value='Manage' style='width:130px' />
 			</form>
 		  </div>
-		  <div style='width:218px;height:130px;float:left;padding:5px;border-width:2px; border-style:outset; border-color: gray;text-align:center'>
+		  <div style='width:217px;height:130px;float:left;padding:5px;border-width:2px; border-style:outset; border-color: gray;text-align:center'>
 		  <b style='font-size:16px'>Add Questions and Variables</b>
 		  <p style='font-size:13px'>Insert questions into the database and their adjesent Variables.</p>
 			<form style='text-align:center' method='post' action='admin_questions.php'>

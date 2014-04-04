@@ -2,18 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <?php
-include 'db_settings.php';
-include 'question_limits.php';
+
+include 'db_settings.php'; //database name and passwd
 include 'answer_functions.php'; // contains a function which returns the state of an answer
 session_start();
-
-//this is here just for testing, to see if there is any problem or not, will be deleted
-echo "<p>Username: ".$_SESSION['username']."</p>";
-echo "<p>Username ID: ".$_SESSION['id']."</p>";
-echo "<p> User id: ".$_SESSION['u_id']."</p>";
-echo "<p>Question_id: ".$_POST['question']."</p>";
-echo "<p>Worksheet_id: ".$_POST['worksheet']."</p>";
-echo "<p>Worksheet_type: ".$_SESSION['w_type']."</p>";
 
 //connecting to the database, it is here because it will be used everywhere
 $con = mysql_connect("localhost",$user,$password);
@@ -22,7 +14,8 @@ if (!$con)
   	die('Could not connect: ' . mysql_error());
   }
 mysql_select_db($db_name,$con) or die ("Could not connect to database");
-$check=0;
+
+include 'question_limits.php';
 
 //this is the most important variable, will be used all along 
 $question_id = $_POST['question']; //the question_id is the primary key 
@@ -34,6 +27,7 @@ if (isset($_POST['Next']))
 {
 	$question_id=onClickNext($question_id,$w_id,$w_type);
 }
+
 //validation procedure, Previous= not save, not skip, unanswered
 if (isset($_POST['Previous']))
 {
@@ -43,18 +37,19 @@ if (isset($_POST['Previous']))
 // setting the skip value in the database 1--skipped 0--unskipped
 if (isset($_POST['Skip']))
 {
-	saveAnswer($question_id,$w_id,1);//last argument 1==skipped
+	$question_id=saveAnswer($question_id,$w_id,$w_type,1);//last argument 1==skipped
 }
-// it doesn't need to check the validation when it clicks on the Next, Previous or Skip buttons
 
+// it doesn't need to check the validation when it clicks on the Next, Previous or Skip buttons
 if (isset($_POST['n']) and !isset($_POST['Next']) and !isset($_POST['Previous']) and !isset($_POST['Skip']))
 {
 	include 'answer_validation.php';
 }
 if (isset($_POST['Save']) and ($validation==true))
 {
-	saveAnswer($question_id,$w_id,0); //last argument 0==answered
+	$question_id=saveAnswer($question_id,$w_id,$w_type,0); //last argument 0==answered
 }
+
 //the end of the php header -- it handles all the situations
 ?>
 <head>
@@ -118,147 +113,67 @@ if (isset($_POST['Save']) and ($validation==true))
     <div id="main">
 		<div class="highlight">
 		<!-- This is where it all begins -->
-<?php
-// that is where the question part is starting the previous part is for formatting the page
+		<?php
+		// that is where the question part starts the previous part is for formatting the page
+		$answerstatus=answerStatus($question_id,$w_id);
+		list($n, $country_id, $var_type)=showQuestion($question_id, $answerstatus, $w_type, $w_id); // it returns the nr of variables		
+		//end of the php part which refers just to the question
+		?>
 
-//it requires a mysql database connection for the questions and for the data 
-	$question_sql="SELECT * FROM questions WHERE q_id LIKE '{$question_id}'";
-	$question=mysql_query($question_sql);
-	
-	if (!$question) {
-	    die('Invalid query: ' . mysql_error());
-	}
-//the question is selected from the table
-	$row = mysql_fetch_assoc($question);
-	$num_results = mysql_num_rows($question); 
-	$question_aux=$row['question']; //if I put just $row['question'] doesent work in the last line
+			<div style='width:800px;text-align:center;float:left;padding:10px'>
+				<div style='text-align:center;width:320px;padding-left:300px'>
+					<input type='hidden' name='question' id='worksheet' value=<?php echo $question_id ?>>
+					<input type='hidden' name='worksheet' id='worksheet' value= <?php echo $_POST['worksheet'] ?>>
+					<?php
+					if ($country_id!=0)
+						echo "<input type='hidden' name='country_id' id='country_id' value=".$country_id.">";
+					?>
+					<input type='hidden' name='str_upper_limit' id='str_upper_limit' value= <?php echo $str_upper_limit ?>>
+					<input type='hidden' name='cfd_upper_limit' id='cfd_upper_limit' value= <?php echo $cfd_upper_limit ?>>
+					<input type='hidden' name='str_down_limit' id='str_down_limit' value= <?php echo $str_down_limit ?>>
+					<input type='hidden' name='cfd_down_limit' id='cfd_down_limit' value= <?php echo $cfd_down_limit ?>>
 
-	if ($num_results > 0)
-	{
-//if everything is OKAY than it will show the question, with number
-		echo "<div style='";
-		//the color of the question, using this answerStatus function
-		switch(answerStatus($question_id,$w_id)) 
-		{
-			case 1: echo "background-color:#E86850;"; break;
-			case 2: echo "background-color:#92CD00;"; break;
-			case 3: echo "background-color:#C0C0C0;"; break;
-		}
+					<?php
+					for ($i=0;$i<$n;$i++)
+					{
+						echo "<input type='hidden' name='var_type[]' id='var_type[]' value=".$var_type[$i]. ">";
+					}
+					?>
+					<input type='hidden' name='n' id='n' value= <?php echo $n //the nr of input fields of a question?>>
+					<!-- Save and Skip buttons-->
+					<div>	
+						<input type='submit' name='Save' style='width=40px; height:40px;' value='Save' />
+					  	<input type='submit' name='Skip' style='width=40px; height:40px;' value='Skip' />
+					</div>					
+					<?php
+					//it is necessary because if it reaches the first than it cannot go to the previous and if the last than cannot go further
+					switch($w_type)
+					{
+						case 1:
+						case 3: 	if ($question_id!=$str_down_limit)
+										echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
+									break;
+						case 2: 	if ($question_id!=$str_down_limit)//because it contains the first 2 question
+										echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
+									break;
+					}
 
-		echo "clear:both;text-align:center;'>
-		<br><div style='border: solid 1px white;font-size:18px';>
-			<p text-align:center; > ".questionNumber($question_id,$w_type).": ".$question_aux."</p></div>";
-	}
-	// to get the variables: type, text, name
-	$variable_sql="SELECT * FROM variable WHERE q_id LIKE '{$question_id}'";
-	$variables=mysql_query($variable_sql);
-
-	if (!$variables) 
-	{
-	    die('Invalid query: ' . mysql_error());
-	}
-
-	$i=0;// an auxiliary variable to get all the solution
-	$num_results = mysql_num_rows($variables);
-	if (mysql_num_rows($variables) > 0) 
-	{
-		while ($row = mysql_fetch_assoc($variables))
-		{
-
-			//storing all the data in a vector			
-			$var_name[$i]=$row['var_name'];
-			$var_text[$i]=$row['var_text'];
-			$var_type[$i]=$row['var_type'];
-			$i++;
-
-		}
-	}
-	$n=$i;
-	echo "<form name='input' action='question.php' method='post' style='text-align:center'>";
-	for($i=0;$i<$n;$i++)
-	{
-		echo "<br><p text-align:center; > ".$var_text[$i]."</p>";
-		switch($var_type[$i])
-		{
-			case 1: include 'country.php';
-					break;
-			case 6:
-			case 7:
-			case 3: echo "<input type='text' name='answer[]' style='padding: 2px; border: solid 1px orange' >";
-					break;
-			case 2: echo "<textarea name='answer[]' rows='4' cols='50' style='border: solid 1px orange'></textarea>";
-					break;
-			case 4:
-			case 5: echo "<input type='radio' name='answer[]' value='yes'>yes
-							<input type='radio' name='answer[]' value='no'>no";
-					break;
-			default: echo "error";
-		}
-		echo "&nbsp";	
-	}
-	echo "<br><br>";
-	include 'insert_hint.php';
-	echo "</div>";
-
-//end of the php part which refers just to the question
-?>
-
-<div style='width:800px;text-align:center;float:left;padding:10px'>
-	<div style='text-align:center;width:320px;padding-left:300px'>
-		  <input type='hidden' name='question' id='worksheet' value=<?php echo $question_id ?>>
-		  <input type='hidden' name='worksheet' id='worksheet' value= <?php echo $_POST['worksheet'] ?>>
-		  <?php
-		  for ($i=0;$i<$n;$i++)
-		  {
-		  	echo "<input type='hidden' name='var_type[]' id='var_type[]' value=".$var_type[$i]. ">";
-		  }
-		  ?>
-		  
-		  <input type='hidden' name='n' id='n' value= <?php echo $n //the nr of input fields of a question?>>
-
-		  <?php
-	//beacuse if there is an error than it has to remain on the same page
-		  if (!isset($validation))
-		  {
-		  	if (!isset($_POST['Skip'])and !isset($_POST['Save']))
-		  		echo "<div>	<input type='submit' name='Save' style='width=40px; height:40px;' value='Save' />
-		  				<input type='submit' name='Skip' style='width=40px; height:40px;' value='Skip' /></div>";
-		  }
-		  else
-		  {
-		  	if ((!isset($_POST['Skip'])and !isset($_POST['Save'])) or (!$validation and isset($_POST['Save'])))
-		  	{
-		  		echo "<div>	<input type='submit' name='Save' style='width=40px; height:40px;' value='Save' />
-						<input type='submit' name='Skip' style='width=40px; height:40px;' value='Skip' /></div>";
-		  	}
-
-		  }
-		  //it is necessary because if it reaches the first than it cannot go to the previous
-		  switch($w_type)
-			{
-				case 1:
-				case 3: 	if ($question_id!=$str_down_limit)
-								echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
-							break;
-				case 2: 	if ($question_id!=$str_down_limit)//because it contains the first 2 question
-								echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
-							break;
-			}
-
-		  switch($w_type)
-			{
-				case 1: 	if ($question_id!=$str_upper_limit)
-								echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
-							break;
-				case 2:	
-				case 3: 	if ($question_id!=$cfd_upper_limit)
-								echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
-							break;
-			}
-		  ?>
+					switch($w_type)
+					{
+						case 1: 	if ($question_id!=$str_upper_limit)
+										echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
+									break;
+						case 2:	
+						case 3: 	if ($question_id!=$cfd_upper_limit)
+										echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
+									break;
+					}
+					?>
+				</div>
+			</div>
+		</div>
 	</div>
-  </div>
-</form>
+</form> <!-- the form was started at the ShowQuestion part, where the textboxes are-->
 <!-- the end of the file-->
 
 <div id="footer">

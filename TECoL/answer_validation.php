@@ -7,8 +7,9 @@ $validation=true;
 for ($i=0;$i<$_POST['n'];$i++)
 {
 	$answer=$_POST['answer'][$i];
-	echo "I'm in the for loop answer value ";
-	echo $answer;
+/*	echo "I'm in the for loop answer value ";
+	echo $answer;*/
+
 	switch($_POST['var_type'][$i])
 	{
 		case 3: 
@@ -16,7 +17,7 @@ for ($i=0;$i<$_POST['n'];$i++)
 		case 7: if (!is_numeric($answer))
 				{
 					print "<script type=\"text/javascript\">";
-					print "alert('Error,this is not numeric!')";
+					print "alert('Error, this is not numeric!')";
 					print "</script>"; 
 					$validation=false;
 					break;
@@ -26,7 +27,7 @@ for ($i=0;$i<$_POST['n'];$i++)
 		case 5: if (empty($answer))
 				{
 					print "<script type=\"text/javascript\">";
-					print "alert('Error, you must enter a value!')";
+					print "alert('Error, you must enter a value (yes/no)!')";
 					print "</script>"; 
 					$validation=false;
 					break;
@@ -46,8 +47,13 @@ for ($i=0;$i<$_POST['n'];$i++)
 							break;
 						}
 					}
+					else
+					{
+						$i++;
+					}
 				}
 				break;
+		case 2:
 		case 1: if (empty($answer))
 				{
 					print "<script type=\"text/javascript\">";

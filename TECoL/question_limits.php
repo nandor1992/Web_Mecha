@@ -1,10 +1,15 @@
 <?php
-//limits of the question for structured, CFD and both
 
-$str_upper_limit=18;
-$cfd_upper_limit=51;
-
-$str_down_limit=1;
-$cfd_down_limit=19;
+if (!isset($_POST['str_down_limit'])) //we don't need to check all of them, because if one isset than also the others
+{
+	list($str_upper_limit, $cfd_upper_limit, $str_down_limit, $cfd_down_limit)=questionLimits();
+}
+else
+{
+	$str_upper_limit=$_POST['str_upper_limit'];
+	$cfd_upper_limit=$_POST['cfd_upper_limit'];
+	$str_down_limit=$_POST['str_down_limit'];
+	$cfd_down_limit=$_POST['cfd_down_limit'];
+}
 
 ?>

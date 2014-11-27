@@ -8,7 +8,7 @@ header('Location: worksheet.php?error=3');
 else
 {
 include 'db_settings.php';
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());
@@ -28,9 +28,13 @@ $u_id=$row['u_id'];
 $sql="INSERT INTO `worksheet`(`u_id`, `w_name`, `w_type`) VALUES ($u_id,'$w_name',$w_type)";
 $result=mysql_query($sql) or die("error at results");
 
+if (isset($_SESSION['worksheet_type']))
+{
+header('Location: worksheet.php?error=2&&type='.$_SESSION['worksheet_type']);
+}
+else
+{
 header('Location: worksheet.php?error=2');
-//Useless ??
-//$_SESSION['w_type']=$w_type;
-
+}
 }
 ?>

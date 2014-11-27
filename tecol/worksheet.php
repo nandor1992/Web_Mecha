@@ -6,6 +6,7 @@ if (!isset($_SESSION['username']))
 {
 header('Location: index.php?error=1');
 }
+
 if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
 {print "<script type=\"text/javascript\">";
 print "alert('Worksheet and all saved Responses Deleted!')";
@@ -21,82 +22,51 @@ if (isset($_REQUEST['error']) and $_REQUEST['error']==3)
 print "alert('Please enter a Worksheet name that is longer then 2 Characters!')";
 print "</script>";   
 }
+if (isset($_REQUEST['error']) and $_REQUEST['error']==4) 
+{print "<script type=\"text/javascript\">";
+print "alert('Invalid use of questions.php redirected')";
+print "</script>";   
+}
 ?>
-<head>
-<!--- Title goes here -->
-<title> TECoL - Worksheet </title>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
-<!--[if IE 6]><link rel='stylesheet' href='css/ie6.css' type='text/css' media='all' /><![endif]-->
-<link rel='shortcut icon' href='css/images/my_icon.ico' />
-<script type='text/javascript' src='js/jquery-1.4.2.min.js'></script>
-<script type='text/javascript' src='js/jquery.jcarousel.pack.js'></script>
-<script type='text/javascript' src='js/func.js'></script>
-</head>
-<body>
-<div class="shell">
-  <div class="border">
-    <div id="header">
-      <h1 id="logo"><a href="#" class="notext">beSMART</a></h1>
-      <div class="socials right">
-        <ul>
-		<div style='text-align:right'>
-		<!-- Username display logout and stuff like that --->
-		<?php
-          if(isset($_SESSION['username']))
-	 { echo "	<p> Hello &nbsp <b> ";
-	 echo $_SESSION['username'];
-	echo " </b>!</p> <a href='logout.php'>Logout </a>";
-	
-	}
-	else
-	echo"
-	<p><b> Guest User </b></p>
-	<a href='login.php'>Login</a>&nbsp&nbsp&nbsp&nbsp
-	<a href='create.php'>Create Account </a>";
-	?>
-        </div></ul>
-      </div>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="navigation">
-      <ul>
-	  <!--- Remember to do the Active stuff --->
-        <li><a href="index.php" >Home</a></li>
-        <li><a href="about.php" >About</a></li>
-        <!-- Menu bar for admin and user --->
-		<?php
-		if(isset($_SESSION['username']))
-		{
-		echo "<li><a href='worksheet.php' class='active'>Worksheet</a></li>";
-        if (isset($_SESSION['admin']))
-		{
-		echo "<li><a href='admin.php'>Administrator</a></li>";
-		}
-        }
-		?>
-      </ul>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="main">
-		<div class="highlight">
-		<!---- This is where it all begins -->
+<!-- Header -->
+<?php
+$title= "Worksheet";
+$active=3;
+include 'header.php';
+?>
+<!-- Main Body -->
+		
 		<div style='width:900px;float:left'>
-          <h3> Worksheet </h3>
-          <img src="css/images/highlight.gif" alt="" class="right" />
+         
 		  <div style='width:900px;float:left;padding:10px'>
           <?php
 		  // Querry for worksheet entries
+if  (!isset($_REQUEST['type']))
+{
+unset($_SESSION['worksheet_type']);
+echo "<div style='text-align:center; width:500px'> 
+		<h2> Select your worksheet type</h2>
+		</br>
+		<a href='worksheet.php?type=1' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 5px;  color: white; font-size:16px; font-weight: bold; float:left;'>STR Tool</a>
+		<a href='worksheet.php?type=2' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 5px;  color: white; font-size:16px; font-weight: bold; float:right;'>CFD Tool</a>
+		</div>";
+}
+else
+{
+$_SESSION['worksheet_type']=$_REQUEST['type'];
+$type_worksheet=$_REQUEST['type'];
 		  include 'db_settings.php';
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());
   }
 mysql_select_db($db_name,$con) or die ("Could not connect to database");
 $id=$_SESSION['id'];
-$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id' )";
+if($type_worksheet==1)
+{$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id' AND w_type=1 )";}
+else
+{$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id' AND w_type!=1 )";}
 $i=0;//for array length		  
 $result=mysql_query($sql) or die("cannot connect 2 ");
     while($row = mysql_fetch_array($result)) {
@@ -112,8 +82,12 @@ $result=mysql_query($sql) or die("cannot connect 2 ");
 		  switch ($row['w_type'])
 		  {
 		  case 1:$type=" Structural";break;
-		  case 2:$type=" CFD";break;
-		  case 3:$type=" Combined";break;
+		  case 2:$type=" CFD1";break;
+		  case 3:$type=" CFD2";break;
+		  case 4:$type=" CFD3";break;
+		  case 5:$type=" CFD4";break;
+		  case 6:$type=" CFD5";break;
+		  case 7:$type=" CFD1";break;
 		  }
 		  echo "<p>Worksheet type:".$type."</p>";
 		  echo "
@@ -130,43 +104,47 @@ $result=mysql_query($sql) or die("cannot connect 2 ");
 		  echo "</p>
 		  </div>";}
 		  // Echoing new sheet if neccesary
-		  if($i<5)
+		  if($i<10)
 		  {echo "
 		  <div style='width:280px;height:100px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;'>
 		  <b>Create New Worksheet !</b>
 		  
 		  <form action='worksheet_create.php' method='post' >
-		  <p> Insert Worksheet name and select type: </p>
-		  <input type='text' name='w_name' id='w_name'  maxlength='30' style='width:130;float:left'>
-		  <select name='w_type' style='width:130;float:left'>
-				<option value='1'>Structured</option>
-				<option value='2'>CFD</option>
-				<option value='3'>Combined</option>
-		  </select>
-		  <input type='submit' name='Submit' value='Create' style='width:130px;float:right' />
-		  </form>
-		  </div>";
+		  </br><p> Insert Worksheet name: 
+		  
+		  <input type='text' name='w_name' id='w_name'  maxlength='30' style='width:130;float:right'>
+		  </p>";
+		  if ($type_worksheet==1)
+		  {
+		  echo "<input type='hidden' name='w_type' value='1' style='width:130;float:left'>";
 		  }
-		  ?>
+		  else
+		  {
+		  echo "<p> Select Type: 
+				<select name='w_type' style='width:130'>
+				<option value='2'>CFD1</option>
+				<option value='3'>CFD2</option>
+				<option value='4'>CFD3</option>
+				<option value='5'>CFD4</option>
+				<option value='6'>CFD5</option>
+				<option value='7'>CFD6</option>
+		  </select>";
+		  }
+		  echo  "<input type='submit' name='Submit' value='Create' style='width:130px;float:right' /> </p>
+		  </form>
+		 </div>";
+		  }
+		  echo "<a href='worksheet.php' style='clear:both; display: block;  width: 60px;  height: 18px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 5px;  color: white; font-size:12px; font-weight: bold; float:right;'>Go back</a>";
+		  
+		  }
+		 ?>
 		  </div >
 		  <div style='width:900px;paddig:10px'>
 		  
 	</div>
 </div>	
-		<!--- This is where it all ends -->  
-		</div>
+		<!-- Footer -->
 
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div class="shadow-l"></div>
-    <div class="shadow-r"></div>
-    <div class="shadow-b"></div>
-  </div>
-  <div id="footer">
-    <p class='left'>Copyright &copy; 2014, UTC-N Cluj Napoca, All Rights Reserved</p>
-    <p class='right'>Made by: Isabela Bîrs, Zoltán Nagy, Nándor Verba</p>
-    <div class='cl'></div>
-  </div>
-</div>
-</body>
-</html>
+<?php
+include 'footer.php';
+?>

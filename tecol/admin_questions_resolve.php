@@ -1,7 +1,7 @@
 <?php
 include 'db_settings.php';
 session_start();
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 					if (!$con)
 					{
 					die('Could not connect: ' . mysql_error());

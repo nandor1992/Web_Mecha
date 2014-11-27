@@ -5,7 +5,7 @@ if (!isset($_SESSION['id'])||!isset($_POST['worksheet']))
 header('Location: index.php?error=3');
 }
 include 'db_settings.php';
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());
@@ -25,6 +25,12 @@ $result=mysql_query($sql) or die("cannot connect 4 ");
 $sql="DELETE FROM `answers` WHERE w_id=".$worksheet;
 $result=mysql_query($sql) or die("cannot connect 5 ");
 
+if (isset($_SESSION['worksheet_type']))
+{
+header('Location: worksheet.php?error=1&&type='.$_SESSION['worksheet_type']);
+}
+else
+{
 header('Location: worksheet.php?error=1');
-
+}
 ?>

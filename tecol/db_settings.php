@@ -1,5 +1,6 @@
 <?php
 $user="root";
-$password="";
+$password="hunter";
 $db_name="database";
+$host="localhost";
 ?>

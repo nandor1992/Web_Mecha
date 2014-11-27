@@ -11,7 +11,7 @@ header('Location: create.php?error=1');
 else
 {
 include 'db_settings.php';
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

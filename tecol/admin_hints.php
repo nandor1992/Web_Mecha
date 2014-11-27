@@ -17,65 +17,14 @@ print "alert('Please enter Text to the specific are if you want to modify it')";
 print "</script>";   
 }
 ?>
-<head>
-<!--- Title goes here -->
-<title> TECoL - Administrator Page</title>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
-<!--[if IE 6]><link rel='stylesheet' href='css/ie6.css' type='text/css' media='all' /><![endif]-->
-<link rel='shortcut icon' href='css/images/my_icon.ico' />
-<script type='text/javascript' src='js/jquery-1.4.2.min.js'></script>
-<script type='text/javascript' src='js/jquery.jcarousel.pack.js'></script>
-<script type='text/javascript' src='js/func.js'></script>
-</head>
-<body>
-<div class="shell">
-  <div class="border">
-    <div id="header">
-      <h1 id="logo"><a href="#" class="notext">beSMART</a></h1>
-      <div class="socials right">
-        <ul>
-		<div style='text-align:right'>
-		<!-- Username display logout and stuff like that --->
-		<?php
-          if(isset($_SESSION['username']))
-	 { echo "	<p> Hello &nbsp <b> ";
-	 echo $_SESSION['username'];
-	echo " </b>!</p> <a href='logout.php'>Logout </a>";
-	
-	}
-	else
-	echo"
-	<p><b> Guest User </b></p>
-	<a href='login.php'>Login</a>&nbsp&nbsp&nbsp&nbsp
-	<a href='create.php'>Create Account </a>";
-	?>
-        </div></ul>
-      </div>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="navigation">
-      <ul>
-	  <!--- Remember to do the Active stuff --->
-        <li><a href="index.php" >Home</a></li>
-        <li><a href="about.php" >About</a></li>
-        <!-- Menu bar for admin and user --->
-		<?php
-		if(isset($_SESSION['username']))
-		{
-		echo "<li><a href='worksheet.php'>Worksheet</a></li>";
-        if (isset($_SESSION['admin']))
-		{
-		echo "<li><a href='admin.php' class='active'>Administrator</a></li>";
-		}
-        }
-		?>
-      </ul>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="main">
-		<div class="highlight">
+<!-- Header -->
+<?php
+$title= "Administrator";
+$active=4;
+include 'header.php';
+?>
+<!-- Main Body -->
+		
 		<!---- This is where it all begins -->
 		<div style='width:900px;float:left'>
           <h3>Hint Text Administration </h3>
@@ -85,7 +34,7 @@ print "</script>";
 		  <?php
 					//initial db connection
 					include 'db_settings.php';
-					$con = mysql_connect("localhost",$user,$password);
+					$con = mysql_connect($host,$user,$password);
 					if (!$con)
 					{
 					die('Could not connect: ' . mysql_error());
@@ -125,15 +74,16 @@ print "</script>";
 		  echo"
 				<table style='width:890px;font-size:12px'>
 					<tr bgcolor='#C0C0C0' style='text-decoration:underline;'>
-						<th width='180px'>Question ID</th>
+						<th width='80x'>Question ID</th>
 						<th width='180px'>Question</th>
 						<th > Hint text</th>
+						<th width='130px'> Hint link </th>
 						<th width='140px' >Operation</th>
 					</tr>";
 					
 					//initial db connection
 					include 'db_settings.php';
-					$con = mysql_connect("localhost",$user,$password);
+					$con = mysql_connect($host,$user,$password);
 					if (!$con)
 					{
 					die('Could not connect: ' . mysql_error());
@@ -159,7 +109,8 @@ print "</script>";
 						die('Invalid query: ' . mysql_error());
 							}
 					$row2 = mysql_fetch_assoc($result2);
-					echo "<td><input type='text' name='text' style='width:99%' value='".$row2['hint']."'/></td>";
+					echo "<td><input type='text' name='text' style='width:98%' value='".$row2['hint']."'/></td>";
+					echo "<td><input type='text' name='link' style='width:98%' value='".$row2['hint_link']."'/></td>";
 					echo "<td>
 							<input type='hidden' name='country' value='".$_SESSION['hint']."'/>
 							<input type='hidden' name='q_id' value='".$row['q_id']."'/>
@@ -176,20 +127,8 @@ print "</script>";
 		  </div>
 		  </div>
          
-		<!--- This is where it all ends --->  
-		</div>
+	<!-- Footer -->
 
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div class="shadow-l"></div>
-    <div class="shadow-r"></div>
-    <div class="shadow-b"></div>
-  </div>
-  <div id="footer">
-    <p class='left'>Copyright &copy; 2014, UTC-N Cluj Napoca, All Rights Reserved</p>
-    <p class='right'>Made by: Isabela Bîrs, Zoltán Nagy, Nándor Verba</p>
-    <div class='cl'></div>
-  </div>
-</div>
-</body>
-</html>
+<?php
+include 'footer.php';
+?>

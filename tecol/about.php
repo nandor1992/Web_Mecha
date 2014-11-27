@@ -3,85 +3,35 @@
 <?php
 session_start();
 ?>
-<head>
-<!--- Title goes here -->
-<title> TECoL - About us </title>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
-<!--[if IE 6]><link rel='stylesheet' href='css/ie6.css' type='text/css' media='all' /><![endif]-->
-<link rel='shortcut icon' href='css/images/my_icon.ico' />
-<script type='text/javascript' src='js/jquery-1.4.2.min.js'></script>
-<script type='text/javascript' src='js/jquery.jcarousel.pack.js'></script>
-<script type='text/javascript' src='js/func.js'></script>
-</head>
-<body>
-<div class="shell">
-  <div class="border">
-    <div id="header">
-      <h1 id="logo"><a href="#" class="notext">beSMART</a></h1>
-      <div class="socials right">
-        <ul>
-		<div style='text-align:right'>
-		<!-- Username display logout and stuff like that --->
-		<?php
-          if(isset($_SESSION['username']))
-	 { echo "	<p> Hello &nbsp <b> ";
-	 echo $_SESSION['username'];
-	echo " </b>!</p> <a href='logout.php'>Logout </a>";
-	
-	}
-	else
-	echo"
-	<p><b> Guest User </b></p>
-	<a href='login.php'>Login</a>&nbsp&nbsp&nbsp&nbsp
-	<a href='create.php'>Create Account </a>";
-	?>
-        </div></ul>
-      </div>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="navigation">
-      <ul>
-	  <!--- Remember to do the Active stuff --->
-        <li><a href="index.php" >Home</a></li>
-        <li><a href="about.php" class="active">About</a></li>
-        <!-- Menu bar for admin and user --->
-		<?php
-		if(isset($_SESSION['username']))
-		{
-		echo "<li><a href='worksheet.php'>Worksheet</a></li>";
-        if (isset($_SESSION['admin']))
-		{
-		echo "<li><a href='admin.php'>Administrator</a></li>";
-		}
-        }
-		?>
-      </ul>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="main">
-		<div class="highlight">
-		<!---- This is where it all begins -->
+<!-- Header -->
+<?php
+$title= "About Us";
+$active=2;
+include 'header.php';
+?>
+<!-- Main Body -->
 		
-          <h3> About Us </h3>
+          <h2 style='text-align:center'> About Us </h2>
+		  <h3 style='text-align:center'> </h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-        
-		<!--- This is where it all ends --->  
-		</div>
+          <p style='text-align:justify'>The project TECoL - Tools for Enforcing Competition Law is a project promoted by the association Second Chance, based in Bourgas (BG), and funded by the European Commission (Programme "Prevention of and Fight Against Crime", Targeted call for proposals “Financial and Economic Crime – FINEC, Action grants 2012”; reference number HOME/2012/ISEC/AG/FINEC/4000003870.
 
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div class="shadow-l"></div>
-    <div class="shadow-r"></div>
-    <div class="shadow-b"></div>
-  </div>
-  <div id="footer">
-    <p class='left'>Copyright &copy; 2014, UTC-N Cluj Napoca, All Rights Reserved</p>
-    <p class='right'>Made by: Isabela Bîrs, Zoltán Nagy, Nándor Verba</p>
-    <div class='cl'></div>
-  </div>
-</div>
-</body>
-</html>
+The main objective of the project is the development of tools for the detection and identification of cartels and other suspicious market strategies.
+
+Organised crime is changing and becoming increasingly diverse in its methods, and its impact on society is getting heavier yet increasingly difficult to spot. Secret cartels are the most serious criminal infringements of the EU competition rules since they invariably result in higher prices and less competitiveness. They harm industry, consumers in the EU and the whole society. Often-times, criminal organisations are involved in cartels or draw benefits from them in various ways.
+
+The project aims at tackling such ingenuity by enabling the citizens to detect cartels, using Nobel Prize winning mathematical theory and a modern ICT approach.
+
+The project has started in May 2013 and will run for 24 months.</p>
+			<h3> Objectives</h3>
+          <img src="css/images/highlight.gif" alt="" class="right" />
+			<p style='text-align:justify'> The main objective of the project is to increase the efficiency of financial investigations through the active involvement of civil society and individuals. We also aim to encourage horizontal cooperation, as well as public-private partnerships between active citizens and empowered institutions for the prevention of financial crime.
+
+The specific objective of the project is to develop and distribute tools for the detection and identification of cartels, specifically web-enabled software using advanced algorithms for the evaluation of companies whose behaviour in a given market situation is suspect and probably the result of cartel (e.g. price fixing, etc.) </p>
+
+        
+		<!-- Footer -->
+
+<?php
+include 'footer.php';
+?>

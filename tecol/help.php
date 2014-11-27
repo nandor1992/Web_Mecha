@@ -4,14 +4,15 @@ session_start();
 ?>
 <!-- Header -->
 <?php
-$title= "Report - Main Page";
-$active=5;
+$title= "Help - Main Page";
+$active=6;
 include 'header.php';
 ?>
 <!-- Main Body -->
 		
 <?php
-echo "<h2> Report is this </h2>";
+echo "<h2> Help is this</h2>";
+
 ?>
 
 <!-- Footer -->

@@ -26,18 +26,16 @@ include 'header.php';
 		
 		<!---- This is where it all begins -->
 		<div style='width:900px;float:left'>
-          <h3>Generated Reports </h3>
+          <h3>Visiters to the Site </h3>
           <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:900px;float:left;padding:10px'>
 		  <fieldset >
-				<legend style='font-size:15px'>Text List</legend>
+				<legend style='font-size:15px'>Grouping</legend>
 				<table style="width:890px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
-						<th width="100px">User</td>
-						<th width="200px">Report Description</td>
-						<th >Comment</td>
-						<th width="160px">Date</td>
-						<th width="140px" >Operation</td>
+						<th width="250px">Country</td>
+						<th >Number of visitors</td>
+						<th width="300px" >Percentage</td>
 					</tr>
 					<?php
 					//initial db connection
@@ -50,26 +48,58 @@ include 'header.php';
 					mysql_select_db($db_name,$con) or die ("Could not connect to database");
 					
 					//selecting users
-					
-					$q="SELECT * FROM `generated_reports` JOIN `users` ON generated_reports.u_id=users.u_id ";
+					$q="SELECT * FROM `visitors` ";
+					$result=mysql_query($q);
+					$tot=mysql_num_rows($result);
+					$q="SELECT count(*),country FROM `visitors` Group by country ORDER BY COUNT(*) DESC ";
 					$result=mysql_query($q);
 					if (!$result) {
 						die('Invalid query: ' . mysql_error());
 							}
 					while($row = mysql_fetch_assoc($result))
 					{
-					echo "<tr bgcolor='#92CD00' style='text-align:center'>";
-					echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
-					echo "<td>".$row['rep_name']."</td>";
-					echo "<td>".$row['rep_comment']."</td>";
-					echo "<td>".$row['w_date']."</td>";
-					echo "<td>
-							<form style='text-align:center;float:left' method='post' action='report_generator.php'>
-							<input type='hidden' name='string' value='".$row['rep_string']."'/>
-							<input type='submit' name='Submit' value='View' style='width:130px' />
-							</form>";
+					{echo "<tr bgcolor='#92CD00' style='text-align:center'>";}
+					echo "<td>".$row['country']."</td>";
+					echo "<td>".$row['count(*)']."</td>";
+					echo "<td>".round($row['count(*)']/$tot*100,2)."%"."</td>";
 					}
+					?>
+		</table> 
+			</fieldset>
+			
+			<fieldset >
+				<legend style='font-size:15px'>Individual</legend>
+				<table style="width:890px;font-size:12px">
+					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
+						<th width="100px">Nr.</td>
+						<th width="400px">IP Address</td>
+						<th >Country</td>
+					</tr>
+					<?php
+					//initial db connection
+					include 'db_settings.php';
+					$con = mysql_connect($host,$user,$password);
+					if (!$con)
+					{
+					die('Could not connect: ' . mysql_error());
+					}
+					mysql_select_db($db_name,$con) or die ("Could not connect to database");
 					
+					//selecting users
+					$q="SELECT * FROM `visitors` ORDER BY country DESC";
+					$result=mysql_query($q);
+					if (!$result) {
+						die('Invalid query: ' . mysql_error());
+							}
+					$i=0;
+					while($row = mysql_fetch_assoc($result))
+					{
+					$i++;
+					{echo "<tr bgcolor='#92CD00' style='text-align:center'>";}
+					echo "<td>".$i."</td>";
+					echo "<td>".$row['ip']."</td>";
+					echo "<td>".$row['country']."</td>";
+					}
 					?>
 		</table> 
 			</fieldset>

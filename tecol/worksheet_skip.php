@@ -7,7 +7,7 @@ header('Location: index.php?error=3');
 }
 //basic db connection
 include 'db_settings.php';
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

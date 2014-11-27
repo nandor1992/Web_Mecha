@@ -12,7 +12,7 @@ header('Location: admin_country.php?error=3');
 }
 else{
 
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

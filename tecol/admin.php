@@ -6,66 +6,14 @@ if (!isset($_SESSION['username'])||!isset($_SESSION['admin']))
 {
 header('Location: index.php?error=2');
 }
+?><!-- Header -->
+<?php
+$title= "Administrator";
+$active=4;
+include 'header.php';
 ?>
-<head>
-<!--- Title goes here -->
-<title> TECoL - Administrator Page</title>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' href='css/jquery.jcarousel.css' type='text/css' media='all' />
-<!--[if IE 6]><link rel='stylesheet' href='css/ie6.css' type='text/css' media='all' /><![endif]-->
-<link rel='shortcut icon' href='css/images/my_icon.ico' />
-<script type='text/javascript' src='js/jquery-1.4.2.min.js'></script>
-<script type='text/javascript' src='js/jquery.jcarousel.pack.js'></script>
-<script type='text/javascript' src='js/func.js'></script>
-</head>
-<body>
-<div class="shell">
-  <div class="border">
-    <div id="header">
-      <h1 id="logo"><a href="#" class="notext">beSMART</a></h1>
-      <div class="socials right">
-        <ul>
-		<div style='text-align:right'>
-		<!-- Username display logout and stuff like that --->
-		<?php
-          if(isset($_SESSION['username']))
-	 { echo "	<p> Hello &nbsp <b> ";
-	 echo $_SESSION['username'];
-	echo " </b>!</p> <a href='logout.php'>Logout </a>";
-	
-	}
-	else
-	echo"
-	<p><b> Guest User </b></p>
-	<a href='login.php'>Login</a>&nbsp&nbsp&nbsp&nbsp
-	<a href='create.php'>Create Account </a>";
-	?>
-        </div></ul>
-      </div>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="navigation">
-      <ul>
-	  <!--- Remember to do the Active stuff --->
-        <li><a href="index.php" >Home</a></li>
-        <li><a href="about.php" >About</a></li>
-        <!-- Menu bar for admin and user --->
-		<?php
-		if(isset($_SESSION['username']))
-		{
-		echo "<li><a href='worksheet.php'>Worksheet</a></li>";
-        if (isset($_SESSION['admin']))
-		{
-		echo "<li><a href='admin.php' class='active'>Administrator</a></li>";
-		}
-        }
-		?>
-      </ul>
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div id="main">
-		<div class="highlight">
+<!-- Main Body -->
+		
 		<!---- This is where it all begins -->
 		<div style='width:900px;float:left'>
           <h3> Main Administrator Page </h3>
@@ -108,46 +56,38 @@ header('Location: index.php?error=2');
 			</form>
 		  </div>
 		  <div style='width:196px;height:130px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
-		  <b style='font-size:16px'>Report Text</b>
+		  <b style='font-size:16px'>Generated Reports</b>
 		  </br>
 		  </br>
-		  <p style='font-size:13px'>Modify the Text that is used to generate the report.</p>
+		  <p style='font-size:13px'>View the generated reports.</p>
 			<form style='text-align:center' method='post' action='admin_report.php'>
-			<input type='submit' name='Submit' value='Modify' style='width:130px' />
+			<input type='submit' name='Submit' value='View' style='width:130px' />
 			</form>
 		  </div>
 		  </div>
-		  <div style='width:230px;height:244px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
+		  <div style='width:230px;height:115px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
 		  <b style='font-size:16px'>List and Modify hints</b>
-		  </br>
-		  </br>
-		  </br>
-		  </br>
+			
 		  <p style='font-size:13px'>You can see the inserted hints grouped to country type where you can modify the text. </p>
-		  </br>
-		  </br>
+
 			<form style='text-align:center' method='post' action='admin_hints.php'>
 			<input type='submit' name='Submit' value='Manage' style='width:130px' />
 			</form>
 		  </div>
-		  
+		  <div style='width:230px;height:115px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
+		  <b style='font-size:16px'>List Visits</b>
+			
+		  <p style='font-size:13px'>You can see the visits grouped by country and the list of allthe ip addresses connected </p>
+
+			<form style='text-align:center' method='post' action='admin_visits.php'>
+			<input type='submit' name='Submit' value='Manage' style='width:130px' />
+			</form>
+		  </div>
 		  </div>
 		  </div>
          
-		<!--- This is where it all ends --->  
-		</div>
+		<!-- Footer -->
 
-      <div class="cl">&nbsp;</div>
-    </div>
-    <div class="shadow-l"></div>
-    <div class="shadow-r"></div>
-    <div class="shadow-b"></div>
-  </div>
-  <div id="footer">
-    <p class='left'>Copyright &copy; 2014, UTC-N Cluj Napoca, All Rights Reserved</p>
-    <p class='right'>Made by: Isabela Bîrs, Zoltán Nagy, Nándor Verba</p>
-    <div class='cl'></div>
-  </div>
-</div>
-</body>
-</html>
+<?php
+include 'footer.php';
+?>

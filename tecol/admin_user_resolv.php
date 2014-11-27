@@ -5,7 +5,7 @@ if (!isset($_POST['user_id']))
 {
 header('Location: index.php?error=3');
 }
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

@@ -12,7 +12,7 @@ header('Location: admin_report.php?error=2');
 }
 else{
 
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

@@ -12,7 +12,7 @@ header('Location: admin_hints.php');
 }
 else
 {
-$con = mysql_connect("localhost",$user,$password);
+$con = mysql_connect($host,$user,$password);
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());
@@ -22,12 +22,12 @@ $sql="SELECT * FROM `hint` WHERE `h_id`='".$_POST['h_id']."'";
 $result=mysql_query($sql) or die("cannot connect 3 ");
 if($row=mysql_fetch_assoc($result))
 {
-$sql="UPDATE `hint` SET `hint`='".$_POST['text']."' WHERE h_id='".$_POST['h_id']."'";
+$sql="UPDATE `hint` SET `hint`='".$_POST['text']."',`hint_link`='".$_POST['link']."'  WHERE h_id='".$_POST['h_id']."'";
 $result=mysql_query($sql) or die("cannot connect 3 ");
 }
 else
 {
-$sql="INSERT INTO `hint` ( `q_id`, `country_id`, `hint`) VALUES ('".$_POST['q_id']."','".$_POST['country']."','".$_POST['text']."')";
+$sql="INSERT INTO `hint` ( `q_id`, `country_id`, `hint`,`hint_link`) VALUES ('".$_POST['q_id']."','".$_POST['country']."','".$_POST['text']."','".$_POST['link']."')";
 $result=mysql_query($sql) or die("cannot connect This time ");
 }
 header('Location: admin_hints.php?error=1');

@@ -1,0 +1,2 @@
+scp -r /helyi folde/akarmi pi@el-rasp-pi.east.utcluj.ro:/var/www/akarmi
+hunter

@@ -46,9 +46,13 @@ include 'header.php';
 		  <?php 
 		  switch($w_type)
 		  {
-		  case 1:echo "Structured";break;
-		  case 2:echo "CFD";break;
-		  case 3:echo "Combined";break;
+		  case 1:echo" Structural";break;
+		  case 2:echo" CFD1";break;
+		  case 3:echo" CFD2";break;
+		  case 4:echo" CFD3";break;
+		  case 5:echo" CFD4";break;
+		  case 6:echo" CFD5";break;
+		  case 7:echo" CFD1";break;
 		  }
 		  ?>
 		  </h2>
@@ -90,14 +94,7 @@ include 'header.php';
 					$q="SELECT w_type FROM worksheet WHERE w_id=".$_SESSION['worksheet'];
 					$result=mysql_query($q);
 					$row = mysql_fetch_assoc($result);
-					if ($row['w_type']==3)
-					{
-					$q="SELECT * FROM questions";
-					}
-					else
-					{
 					$q="SELECT * FROM questions WHERE w_type=".$row['w_type']." OR w_type=0";
-					}
 					$result=mysql_query($q);
 					if (!$result) {	die('Invalid query: ' . mysql_error());	}
 					$i=0;

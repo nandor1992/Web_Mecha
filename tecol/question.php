@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <?php
-
 include 'db_settings.php'; //database name and passwd
 include 'answer_functions.php'; // contains a function which returns the state of an answer
 session_start();
@@ -84,10 +83,8 @@ include 'header.php';
 					if ($country_id!=0)
 						echo "<input type='hidden' name='country_id' id='country_id' value=".$country_id.">";
 					?>
-					<input type='hidden' name='str_upper_limit' id='str_upper_limit' value= <?php echo $str_upper_limit ?>>
-					<input type='hidden' name='cfd_upper_limit' id='cfd_upper_limit' value= <?php echo $cfd_upper_limit ?>>
-					<input type='hidden' name='str_down_limit' id='str_down_limit' value= <?php echo $str_down_limit ?>>
-					<input type='hidden' name='cfd_down_limit' id='cfd_down_limit' value= <?php echo $cfd_down_limit ?>>
+					<input type='hidden' name='upper_limit' id='upper_limit' value= <?php echo $upper_limit ?>>
+					<input type='hidden' name='down_limit' id='down_limit' value= <?php echo $down_limit ?>>
 
 					<?php
 					for ($i=0;$i<$n;$i++)
@@ -103,26 +100,14 @@ include 'header.php';
 					</div>					
 					<?php
 					//it is necessary because if it reaches the first than it cannot go to the previous and if the last than cannot go further
-					switch($w_type)
+					if($question_id!=1)
 					{
-						case 1:
-						case 3: 	if ($question_id!=$str_down_limit)
-										echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
-									break;
-						case 2: 	if ($question_id!=$str_down_limit)//because it contains the first 2 question
-										echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
-									break;
+						echo "<div><input type='submit' name='Previous' value='Previous' style='float:left' /></div>";
 					}
 
-					switch($w_type)
+					if($question_id!=$upper_limit)
 					{
-						case 1: 	if ($question_id!=$str_upper_limit)
-										echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
-									break;
-						case 2:	
-						case 3: 	if ($question_id!=$cfd_upper_limit)
-										echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
-									break;
+						echo "<input type='submit' name='Next' value='Next' style='float:right'/>";
 					}
 					?>
 				</div>

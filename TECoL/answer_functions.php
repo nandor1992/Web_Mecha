@@ -39,71 +39,37 @@ function onClickNext($question_id, $worksheet_id, $w_type)
 {
 	include 'question_limits.php';//to know the limits of the question
 	//first it goes to the next question
-	switch($w_type)
+	if($question_id!=$upper_limit)//it cannot go further
 	{
-		case 1: 	if ($question_id<$str_upper_limit)
-						$question_id++;
-					break;
-		case 2:		if ($question_id<$cfd_upper_limit)
-					{
-						if ($question_id==2)
-						{
-							$question_id=$cfd_down_limit;
-						}
-						else
-						{
-							$question_id++;
-						}
-					}
-					break;
-		case 3: 	if ($question_id<$cfd_upper_limit)
-						$question_id++;
-					break;
+		if($question_id==3)//this is for the first 3 question which belongs to each workshhet
+		{
+			$question_id=$down_limit;
+		}
+		else
+		{
+			$question_id++;
+		}
 	}
 	//it check if it was skipped
-	//$status=answerStatus($question_id,$w_id);
 	while(answerStatus($question_id,$worksheet_id)==1)//it goes while it gets a value which is not skipped
 	{
-		//include 'is_skipped_answered.php';
 		echo $question_id;
-		switch($w_type)
+
+		if($question_id!=$upper_limit)//it cannot go further
 		{
-			case 1:
-					 	if ($question_id<$str_upper_limit)
-						{
-							$question_id++;
-						}
-						else
-						{
-							header('Location: worksheet_detailed.php?error=4');
+			if($question_id==3)//this is for the first 3 question which belongs to each workshhet
+			{
+				$question_id=$down_limit;
+			}
+			else
+			{
+				$question_id++;
+			}
+		}
+		else
+		{
+			header('Location: worksheet_detailed.php?error=4');
 							$check=1;
-						}
-						break;
-
-			case 2:		if ($question_id<$cfd_upper_limit)
-						{
-							if ($question_id==2)
-							{
-								$question_id=$cfd_down_limit;
-							}
-							else
-							{
-								$question_id++;
-							}
-						}
-						else
-						{
-							header('Location: worksheet_detailed.php?error=4');
-							$check=1;
-						}
-						break;
-
-			case 3: 	if ($question_id<$cfd_upper_limit)
-							$question_id++;
-						else
-							header('Location: worksheet_detailed.php?error=4');
-							$check=1;
-						break;
 		}
 		if (isset($check))
 		{
@@ -118,67 +84,44 @@ function onClickPrevious($question_id, $worksheet_id, $w_type)
 {
 	include 'question_limits.php';//to know the limits of the question
 	
-	switch($w_type)
-	{
-		case 1:
-		case 3: 	if ($question_id>$str_down_limit)
-						$question_id--;							
-					break;
 
-		case 2: 	if ($question_id>$str_down_limit) //because of the first 2 question str_down has used
-					{
-						if ($question_id==$cfd_down_limit)
-						{
-							$question_id=2;
-						}
-						else
-						{
-							$question_id--;
-						}
-					}
-					break;
+	if($question_id>$down_limit)//it cannot go further
+	{
+		$question_id--;
 	}
+	else
+	{
+		if ($question_id==$down_limit)
+			$question_id=3;//this is the upper limit for 0 type questions
+		else
+			if ($question_id!=1)
+				$question_id--;
+	}
+
 	while(answerStatus($question_id,$worksheet_id)==1)//1-is for skipped
 	{
-		switch($w_type)
+		if($question_id>$down_limit)//it cannot go further
 		{
-			case 1:
-			case 3: 	if ($question_id>$str_down_limit)
-						{
-							$question_id--;
-							echo $question_id;
-						}
-						else
-						{
-							header('Location: worksheet_detailed.php?error=4');
-							$check=1;
-						}
-							
-						break;
-			case 2: 	if ($question_id>$str_down_limit)//because of the first 2 question str_dow is used
-						{
-
-							if ($question_id==$cfd_down_limit)
-							{
-								$question_id=2;
-							}
-							else
-							{
-								$question_id--;
-							}
-						}
-						else
-						{
-							header('Location: worksheet_detailed.php?error=4');
-							$check=1;
-						}
-						break;
+			$question_id--;
 		}
+		else
+		{
+			if ($question_id==$down_limit)
+				$question_id=3;//this is the upper limit for 0 type questions
+			else
+				if ($question_id!=1)
+					$question_id--;
+				else
+				{
+					header('Location: worksheet_detailed.php?error=4');
+					$check=1;			
+				}
+		}
+		
 		if (isset($check))
 		{
 			break;
 		}
-
 	}
 	return $question_id;
 }
@@ -250,9 +193,9 @@ function questionNumber($question_id, $w_type)
 	include "question_limits.php";
 	$q_nr=$question_id;
 
-	if (($w_type==2) AND ($question_id!=2) AND ($question_id!=1))
+	if ($question_id>3)
 	{
-		$q_nr=$question_id-$str_upper_limit+2;
+		$q_nr=($question_id-$down_limit+1)+3;//+3 because of the 0 type questions
 	}
 	return $q_nr;
 }
@@ -262,12 +205,8 @@ function progressBar($worksheet_id, $w_type)
 	//this function shows a progress bar currently answered question/ all question at this type
 	include 'question_limits.php';
 	//calculating the maximum of the progress bar by using the worksheet type
-	switch($w_type)
-	{
-		case 1: $max=$str_upper_limit; break;
-		case 2: $max=$cfd_upper_limit-$str_upper_limit+2; break;
-		case 3: $max=$cfd_upper_limit; break;
-	}
+
+	$max=($upper_limit-$down_limit+1)+3;
 
 	// getting the answers number by using the worksheet_id
 	$sql="SELECT a_id FROM answers WHERE w_id='".$worksheet_id."'";
@@ -276,7 +215,6 @@ function progressBar($worksheet_id, $w_type)
 	$current_value=mysql_num_rows($result);
 
 	echo "<meter style='width:100%;height:2em'  value=".$current_value." min='0' max=".$max."> ".$current_value." out of ".$max."</meter>";
-
 }
 
 function countryDropDownList($selected)
@@ -460,34 +398,31 @@ function showTextBoxes($var_text, $var_type, $n, $text)
 	}
 }
 
-function questionLimits()
+function questionLimits($w_type)
 {
-	$sql="SELECT w_type FROM questions";
+	$sql="SELECT w_type,q_id  FROM questions WHERE w_type=".$w_type." ";
 	$result=mysql_query($sql) or die ("I died here");
-	
-	$str_upper_limit=0;
-	$cfd_upper_limit=0;
 
-	$str_down_limit=1;
-	$cfd_down_limit=19;
+	$down_limit=0;
+	$upper_limit=0;//this is just to initialize with something
+
+	$countAux1=0;//auxiliary variable
 
 	while($row=mysql_fetch_assoc($result))
 	{
-		if ($row['w_type']==1)
+		if($row['w_type']==$w_type)
 		{
-			$str_upper_limit++;
-		}
-		if ($row['w_type']==2)
-		{
-			$cfd_upper_limit++;
-		}
+			$countAux1++;
+			if ($countAux1==1)//the first element
+			{
+				$down_limit=$row['q_id'];
+				//echo $row['q_id'];
+			}
+		}					
 	}
-	$str_upper_limit+=2;
-	$cfd_upper_limit=$cfd_upper_limit+$str_upper_limit;
-	$cfd_down_limit=$str_upper_limit+1;
 
-	//echo $cfd_upper_limit;
-	
-	return array ($str_upper_limit, $cfd_upper_limit, $str_down_limit, $cfd_down_limit);
+	$upper_limit=$down_limit+$countAux1-1;//Assumming that they are in the right order!!!!
+
+	return array ($down_limit, $upper_limit);
 }
 ?>

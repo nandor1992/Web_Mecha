@@ -1,15 +1,14 @@
 <?php
 
-if (!isset($_POST['str_down_limit'])) //we don't need to check all of them, because if one isset than also the others
+$w_type=$_SESSION['w_type'];
+if (!isset($_POST['down_limit'])) //we don't need to check all of them, because if one isset than also the others
 {
-	list($str_upper_limit, $cfd_upper_limit, $str_down_limit, $cfd_down_limit)=questionLimits();
+	list($down_limit, $upper_limit)=questionLimits($w_type);
 }
 else
 {
-	$str_upper_limit=$_POST['str_upper_limit'];
-	$cfd_upper_limit=$_POST['cfd_upper_limit'];
-	$str_down_limit=$_POST['str_down_limit'];
-	$cfd_down_limit=$_POST['cfd_down_limit'];
+	$upper_limit=$_POST['upper_limit'];
+	$down_limit=$_POST['down_limit'];
 }
 
 ?>

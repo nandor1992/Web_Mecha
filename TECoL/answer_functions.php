@@ -261,9 +261,7 @@ function insertHint($question_id, $worksheet_id)
 	{
 		$country_id=$_POST['country_id'];
 	}
-	if (isset($country_id))
-	{
-		$sql="SELECT hint FROM hint WHERE country_id='".$country_id."' AND q_id='".$question_id."'";
+		$sql="SELECT * FROM hint WHERE  q_id='".$question_id."'";
 
 		$result=mysql_query($sql) or die("cannot connect 2 ");
 
@@ -271,11 +269,12 @@ function insertHint($question_id, $worksheet_id)
 		while ($row = mysql_fetch_assoc($result))
 		{
 			echo"<div style='border: solid 1px white';>
-			 <br><p> Hint : ".$row['hint']. "</p><br></div>";
+			 <br><p> Hint : ".$row['hint']. " <a href='".$row['hint_link']."' target='_blank'>Help</a> </p><br></div>";
 		}
-	}
 
 	return $country_id;
+	
+
 }
 
 function showQuestion($question_id, $answerstatus, $w_type, $w_id)

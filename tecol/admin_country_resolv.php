@@ -33,8 +33,6 @@ case 'Remove Country':
 $sql="DELETE FROM `countries` WHERE q_id='".$_POST['q_id']."'";
 $result=mysql_query($sql) or die("cannot connect del country ");
 
-$sql="DELETE FROM `hint` WHERE country_id='".$_POST['q_id']."'";
-$result2=mysql_query($sql) or die("cannot connect del hints ");
 header('Location: admin_country.php?error=2');
 break;
 }}

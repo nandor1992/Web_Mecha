@@ -41,36 +41,7 @@ include 'header.php';
 					}
 					mysql_select_db($db_name,$con) or die ("Could not connect to database");
 					
-					//selecting users
 					
-					$q="SELECT * FROM `countries`";
-					$result=mysql_query($q);
-					if (!$result) {
-						die('Invalid query: ' . mysql_error());
-							}
-
-					?>
-		  <b> Select Country:&nbsp</b>
-							<select name='w_type' style='width:130px'>
-								<?php
-								while($row = mysql_fetch_assoc($result))
-								{
-								if ((isset($_SESSION['hint']))&&($_SESSION['hint']==$row['q_id'])){
-								echo "<option selected value='".$row['q_id']."' >".$row['country']."</option>";
-								}
-								else
-								{
-								echo "<option value='".$row['q_id']."' >".$row['country']."</option>";
-								}
-								}
-								?>
-							</select>
-							<input type='submit' name='Submit' value='Display' style='width:130px' />
-							</form> 
-		  <fieldset >
-		  <legend style='font-size:15px'>Question List</legend>
-		  <?php
-		   if (isset($_SESSION['hint'])){
 		  echo"
 				<table style='width:890px;font-size:12px'>
 					<tr bgcolor='#C0C0C0' style='text-decoration:underline;'>
@@ -103,7 +74,7 @@ include 'header.php';
 					echo "<td>".$row['q_id']."</td>";
 					echo "<td>".$row['question']."</td>";
 					echo "<form style='text-align:center;float:left' method='post' action='admin_hint_resolv.php'>";
-					$q=" SELECT * FROM `hint` WHERE `q_id`='".$row['q_id']."' AND `country_id`='".$_SESSION['hint']."'";
+					$q=" SELECT * FROM `hint` WHERE `q_id`='".$row['q_id']."'";
 					$result2=mysql_query($q);
 					if (!$result2) {
 						die('Invalid query: ' . mysql_error());
@@ -112,7 +83,6 @@ include 'header.php';
 					echo "<td><input type='text' name='text' style='width:98%' value='".$row2['hint']."'/></td>";
 					echo "<td><input type='text' name='link' style='width:98%' value='".$row2['hint_link']."'/></td>";
 					echo "<td>
-							<input type='hidden' name='country' value='".$_SESSION['hint']."'/>
 							<input type='hidden' name='q_id' value='".$row['q_id']."'/>
 							<input type='hidden' name='h_id' value='".$row2['h_id']."'/>
 							<input type='submit' name='Submit' value='Save Changes' style='width:130px' />
@@ -120,7 +90,7 @@ include 'header.php';
 					}
 					
 					echo "</table> ";
-					}
+					
 		?>
 			</fieldset>
 		  

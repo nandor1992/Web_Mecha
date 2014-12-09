@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2014 at 10:38 PM
+-- Generation Time: Dec 09, 2014 at 06:48 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `answer` text NOT NULL,
   PRIMARY KEY (`a_id`),
   UNIQUE KEY `a_id` (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `answers`
@@ -51,7 +51,8 @@ INSERT INTO `answers` (`a_id`, `q_id`, `w_id`, `var_id`, `skip`, `answer`) VALUE
 (59, 27, 10, 67, 0, '1.27'),
 (60, 27, 10, 68, 0, '1.45'),
 (61, 27, 10, 69, 0, '1.69'),
-(62, 28, 10, 70, 0, 'Da pa net');
+(62, 28, 10, 70, 0, 'Da pa net'),
+(63, 1, 11, 1, 0, '2');
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,6 @@ INSERT INTO `generated_reports` (`rep_id`, `u_id`, `rep_name`, `rep_string`, `re
 CREATE TABLE IF NOT EXISTS `hint` (
   `h_id` int(11) NOT NULL AUTO_INCREMENT,
   `q_id` int(11) NOT NULL,
-  `country_id` int(11) NOT NULL,
   `hint` varchar(2000) NOT NULL,
   `hint_link` varchar(100) NOT NULL,
   PRIMARY KEY (`h_id`)
@@ -141,9 +141,9 @@ CREATE TABLE IF NOT EXISTS `hint` (
 -- Dumping data for table `hint`
 --
 
-INSERT INTO `hint` (`h_id`, `q_id`, `country_id`, `hint`, `hint_link`) VALUES
-(1, 1, 5, 'fisrt_hint', '/help'),
-(2, 2, 5, 'second hin', '/help');
+INSERT INTO `hint` (`h_id`, `q_id`, `hint`, `hint_link`) VALUES
+(1, 1, 'fisrt_hint', '/help'),
+(2, 2, 'second hin', '/help');
 
 -- --------------------------------------------------------
 
@@ -385,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
   `w_type` tinyint(1) NOT NULL COMMENT '0 foor base questions, 1 for structural, 2-7:CFD',
   `w_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `worksheet`
@@ -394,7 +394,9 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
 INSERT INTO `worksheet` (`w_id`, `u_id`, `w_name`, `w_type`, `w_date`) VALUES
 (8, 1, 'Try1', 1, '2014-11-27 17:05:46'),
 (9, 1, 'try2', 1, '2014-11-27 17:09:10'),
-(10, 1, 'try1', 4, '2014-11-27 17:09:19');
+(10, 1, 'try1', 4, '2014-11-27 17:09:19'),
+(11, 1, 'qdfsdf', 3, '2014-12-01 14:31:33'),
+(12, 1, 'sdf', 4, '2014-12-01 14:31:51');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

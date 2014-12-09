@@ -128,7 +128,12 @@ include 'header.php';
 					{
 					case 0:echo "<td> Base </td> ";break;
 					case 1:echo "<td> Structured </td>";break;
-					case 2:echo "<td> CFD </td>";break;
+					case 2:echo "<td> CFD1 </td>";break;
+					case 3:echo "<td> CFD2 </td>";break;
+					case 4:echo "<td> CFD3 </td>";break;
+					case 5:echo "<td> CFD4 </td>";break;
+					case 6:echo "<td> CFD5 </td>";break;
+					case 7:echo "<td> CFD6 </td>";break;
 					}
 					echo "<form style='text-align:center;float:left' method='post' action='admin_questions_resolve.php'>";
 					echo "<td><input type='text' name='text' style='width:99%' value='".$row['question']."'/></td>";

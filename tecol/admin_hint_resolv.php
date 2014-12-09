@@ -27,7 +27,7 @@ $result=mysql_query($sql) or die("cannot connect 3 ");
 }
 else
 {
-$sql="INSERT INTO `hint` ( `q_id`, `country_id`, `hint`,`hint_link`) VALUES ('".$_POST['q_id']."','".$_POST['country']."','".$_POST['text']."','".$_POST['link']."')";
+$sql="INSERT INTO `hint` ( `q_id`, `hint`,`hint_link`) VALUES ('".$_POST['q_id']."','".$_POST['text']."','".$_POST['link']."')";
 $result=mysql_query($sql) or die("cannot connect This time ");
 }
 header('Location: admin_hints.php?error=1');

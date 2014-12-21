@@ -22,7 +22,6 @@ function getRealIpAddr()
    return $ip;
 }
 
-session_start();
 if (isset($_REQUEST['error']) and $_REQUEST['error']==1) 
 {print "<script type=\"text/javascript\">";
 print "alert('Error,Please log in to view this page')";
@@ -55,37 +54,25 @@ mysql_select_db($db_name,$con) or die ("Could not connect to database");
 $sql="SELECT * FROM visitors WHERE ip='".$ip_req."' ";
 $result=mysql_query($sql) or die("cannot connect 3 ");
 $res2= mysql_num_rows($result);
-if(!isset($_SESSION['username'])&&($res2==0))
-{
-$xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".getRealIpAddr());
- $country_req=$xml->geoplugin_countryName;
-  if ($country_req=="") {$country_req="Unknown";}
-$sql="INSERT INTO visitors (`ip`, `country`) VALUES ('".$ip_req."', '".$country_req."')" ;
-$result=mysql_query($sql) or die("cannot connect 3 ");
-
-}
-?>
-
-<!-- Header -->
-<?php
+session_start();
 $title= "Main Page";
-$active=1;
+$style=1;
 include 'header.php';
+
 ?>
-<!-- Main Body -->
-
-
-          <h2 style='text-align:center'>Welcome to the Tecol Website</h2>
-		  </br>
-		  <h3>Objectives</h3>
-          <img src="css/images/highlight.gif" alt="" class="right" />
-          <p style='text-align:justify'>The main objective of the project is to increase the efficiency of financial investigations through the active involvement of civil society and individuals. We also aim to encourage horizontal cooperation, as well as public-private partnerships between active citizens and empowered institutions for the prevention of financial crime.
-
-The specific objective of the project is to develop and distribute tools for the detection and identification of cartels, specifically web-enabled software using advanced algorithms for the evaluation of companies whose behaviour in a given market situation is suspect and probably the result of cartel (e.g. price fixing, etc.)</p>
-		
-
-<!-- Footer -->
-
-<?php
+            	<section id="sec-1">
+                <p>TECOL-Tools for Enforcing Competition Low is meant to prevent and fight against one of the most dangerous criminal threats of  the contemporary society. The aim is detecting and identification of cartels. As identified in the OCTA 2011 „Key judgments: Organised crime is changing and becoming increasingly diverse in its methods, and impact on society”. It is using Noble – prize winning mathematical theory and modern ICT approach, to enable the EU citizens to detect cartels. Secret cartels are the most serious criminal infringements of the EU competition rules since they invariably result in higher prices and less competitive. They harm industry, consumers in the EU and the whole society.</p>
+                </section>
+                
+                <section id="sec-2">
+                <a href="cfd-tool.php" target="_top"><div id="cfd-button"><h1>CFD<br>
+TOOL</h1></div></a>
+                </section>
+                
+                <section id="sec-3">
+                <a href="str-tool.php" target="_top"><div id="str-button"><h2>STR TOOL</h2></div></a>
+                </section>
+            
+            <?php
 include 'footer.php';
 ?>

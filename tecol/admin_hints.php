@@ -26,10 +26,10 @@ include 'header.php';
 <!-- Main Body -->
 		
 		<!---- This is where it all begins -->
-		<div style='width:900px;float:left'>
-          <h3>Hint Text Administration </h3>
+		<div style='width:</h3></div>;float:left'>
+          <div id="page-title"><h3>Hint Text Administration </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  <form style='text-align:center' method='post' action='admin_hint_resolv.php'>
 		  <?php
 					//initial db connection
@@ -43,7 +43,7 @@ include 'header.php';
 					
 					
 		  echo"
-				<table style='width:890px;font-size:12px'>
+				<table style='width:950px;font-size:12px'>
 					<tr bgcolor='#C0C0C0' style='text-decoration:underline;'>
 						<th width='80x'>Question ID</th>
 						<th width='180px'>Question</th>

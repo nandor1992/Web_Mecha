@@ -1,0 +1,445 @@
+@charset "utf-8";
+html, 
+body, 
+img, 
+p, 
+h1, 
+h2, 
+h3,
+h4,
+h5,
+#wrapper,
+#container,
+header,
+#logo-nav-container,
+#logo,
+#slogan,
+nav,
+.sub-nav,
+.main-nav,
+.main-nav li,
+article,
+section,
+#page-title
+#sec-1,
+#sec-2,
+table,
+#sec-3,
+#cfd-button,
+footer,
+#footer-menu,
+.fm01,
+.fm02,
+.fm03,
+#ec-logo,
+#contact
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	text-decoration: none;
+}
+
+html {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 1000px;
+	margin-top: 5px;
+	margin-right: auto;
+	margin-bottom: 30px;
+	margin-left: auto;
+	height: auto;
+	clear: both;
+}
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	}
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 32pt;
+	font-weight: bold;
+	
+}
+
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24pt;
+	font-weight: bold;
+	}
+
+h3 {
+	font-size: 12pt;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	
+}
+
+h4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	font-weight: normal;
+}
+
+h5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 10pt;
+}
+
+h6{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;	
+}
+
+a, a:link, a:visited{
+	text-decoration: none;
+	color: #CCCCCC;
+	outline: none;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+#wrapper {
+	width: 1000px;
+	box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.3);
+	float: left;
+	margin: auto;
+	}
+	
+#container {
+	height: auto;
+	width: 1000px;
+	float: left;
+}
+
+header {
+	height: 140px;
+	width: 1000px;
+	float: left;
+	background-attachment: fixed;
+	background-image: url(../images/background-light.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+.date-time {
+	font-size: 9pt;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #CCCCCC;
+	float: left;
+	height: auto;
+	width: auto;
+	padding-left: 7px;
+	margin-top: 5px;
+}
+
+.sub-nav ul {
+	float: right;
+	text-align: right;
+	padding-right: 7px;
+	margin-top: 5px;
+	margin-bottom: 30px;
+}
+
+.sub-nav li {
+	display: inline-block;
+	font-size: 9pt;
+	text-align: right;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #999999;
+	padding-right: 3px;
+	padding-left: 5px;	
+}
+
+.sub-nav li:first-child {
+	border: none;
+}
+
+#logo-nav-container {
+	background-color: rgba(0,0,0,0.3);
+	float: left;
+	width: 1000px;
+	height: 50px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+	position: relative;
+	display: table;
+	margin-top: 25px;
+}
+
+
+#logo {
+	float: left;
+	height: 50px;
+	width: 150px;
+}
+
+#slogan {
+	display: table;
+	width: auto;
+	padding-left: 5px;
+	margin: auto;
+	float: left;
+	height: 50px;
+	padding-right: 5px;
+}
+
+#text-slogan {
+	text-align: left;
+	vertical-align: middle;
+	display: table-cell;
+	text-shadow: 1px 1px 3px rgba(51,51,51,1);
+	line-height: 15pt;
+	color: #CCCCCC;
+	}
+
+nav {
+	width: auto;
+	float: right;
+	height: 50px;
+	display: table;
+}
+
+.main-nav {
+	vertical-align: middle;
+	display: table-cell;
+	}
+
+.main-nav ul {
+	vertical-align: middle;
+	display: table-cell;
+	}
+
+.main-nav li {
+	display: inline-block;
+	float: left;
+	font-size: 11pt;
+	font-weight: bold;
+	text-shadow: 1px 1px 3px rgba(0,0,0,1);
+	background-color: transparent;
+	background-image: url(../images/dot-shadow.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+.main-nav li:first-child {
+	background-image: none;
+}
+	
+#page-title {
+	vertical-align: middle;
+	width: 930px;
+	height: 33px;
+	display: table-cell;
+	float: left;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	margin: 30px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+}
+
+#page-title h3{
+	color: #BC0D14;
+	font-weight: bold;
+	padding-right: 15px;
+	font-size: 14pt;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+	
+article {
+	height: auto;
+	width: 100%;
+	margin: auto;
+	float: left;
+	position: relative;
+}
+
+#sec-1 {
+	float: left;
+	height: auto;
+	width: 300px;
+	text-align: left;
+	white-space: normal;
+	line-height: 23px;
+}
+
+#sec-2 {
+	padding-bottom:20px; /*отступ снизу*/
+	width:930px; /*указываем общую ширину блока с колонками*/
+	text-align:justify; /*выравнивание текста внутри колонок*/
+	column-count: 2; /*количество колонок, на которое хотим разбить текст*/
+	-moz-column-count: 2; /*для мозилы*/
+	-webkit-column-count: 2; /*для webkit браузеров*/
+	column-gap: 40px; /*отступ между колонками*/
+	-moz-column-gap: 40px;
+	-webkit-column-gap: 40px;
+	column-rule: 1px dotted #BB0C13; /*если требуется по дизайну, разделяем колонки линией*/
+	-moz-column-rule: 1px dotted #BB0C13;
+	-webkit-column-rule: 1px dotted #BB0C13;
+	color: #333333;
+	padding-right: 20px;
+	padding-left: 20px;
+	float: left;
+	margin: 10px;
+	line-height: 15pt;
+}
+
+#sec-2 a {
+	color: #3366CC;
+	font-size: 12pt;
+	}
+	
+#sec-2 a:hover {
+	color: #BC0D14;
+}
+
+
+table {
+	border-spacing: 1px;
+	text-align: center;
+	margin: auto;
+}
+
+tr td {
+	padding: 5px;
+}
+
+#sec-3 {
+	width: 230px;
+	height: 100px;
+	color: #1A324D;
+	font-size: 36px;
+	border-radius: 15px;
+	display: table;
+	margin-top: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+	clear: both;
+}
+
+#button {
+	color: #333333;
+	background-color: rgba(255,204,51,0.9);
+	width: 230px;
+	height: 85px;
+	border-radius: 15px;
+	display: table;
+	-webkit-box-shadow: inset -1px -1px 5px 3px rgba(209,139,0,1);
+	-moz-box-shadow: inset -1px -1px 5px 3px rgba(209,139,0,1);
+	box-shadow: inset -1px -1px 5px 3px rgba(209,139,0,1);
+	background: rgba(255,217,102,1);
+	background: -moz-linear-gradient(top, rgba(255,217,102,1) 0%, rgba(252,205,77,1) 48%, rgba(248,181,0,1) 53%, rgba(255,217,102,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,217,102,1)), color-stop(48%, rgba(252,205,77,1)), color-stop(53%, rgba(248,181,0,1)), color-stop(100%, rgba(255,217,102,1)));
+	background: -webkit-linear-gradient(top, rgba(255,217,102,1) 0%, rgba(252,205,77,1) 48%, rgba(248,181,0,1) 53%, rgba(255,217,102,1) 100%);
+	background: -o-linear-gradient(top, rgba(255,217,102,1) 0%, rgba(252,205,77,1) 48%, rgba(248,181,0,1) 53%, rgba(255,217,102,1) 100%);
+	background: -ms-linear-gradient(top, rgba(255,217,102,1) 0%, rgba(252,205,77,1) 48%, rgba(248,181,0,1) 53%, rgba(255,217,102,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,217,102,1) 0%, rgba(252,205,77,1) 48%, rgba(248,181,0,1) 53%, rgba(255,217,102,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd966', endColorstr='#ffd966', GradientType=0 );
+	margin: auto;
+	clear: both;
+	text-align: center;
+}
+#button:hover {
+	color: #BC0D14;
+}
+
+#sec-3 h2 {
+	vertical-align: middle;
+	display: table-cell;
+	text-align: center;
+	}
+
+footer {
+	background-color: #666;
+	float: left;
+	height: auto;
+	width: 1000px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #FFF;
+	display: table;
+}
+#footer-menu {
+	float: left;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+.fm{
+	float: left;
+	height: auto;
+	width: auto;
+	margin: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.fm li {
+	display: block;
+}
+
+#ec-logo {
+	float: right;
+	height: 200px;
+	padding-right: 20px;
+	padding-top: 20px;
+}
+
+#disclaimer {
+	float: left;
+	width: 640px;
+	height: auto;
+	padding: 15px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	}
+	 
+#disclaimer p {
+	font-size: 9pt;
+	color: #ffffff;
+	text-align: justify;
+	}
+
+#contact {
+	height: 200px;
+	width: 200px;
+	background-color: #BC0D14;
+	clear: both;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-bottom: 20px;
+	margin-left: auto;
+	display: table;
+	}
+
+#contact p {
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 18px;
+	line-height: 20pt;
+	}

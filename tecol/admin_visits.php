@@ -25,13 +25,13 @@ include 'header.php';
 <!-- Main Body -->
 		
 		<!---- This is where it all begins -->
-		<div style='width:900px;float:left'>
-          <h3>Visiters to the Site </h3>
+		<div style='width:</h3></div>;float:left'>
+          <div id="page-title"><h3>Visiters to the Site </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  <fieldset >
 				<legend style='font-size:15px'>Grouping</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="250px">Country</td>
 						<th >Number of visitors</td>
@@ -69,7 +69,7 @@ include 'header.php';
 			
 			<fieldset >
 				<legend style='font-size:15px'>Individual</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="100px">Nr.</td>
 						<th width="400px">IP Address</td>

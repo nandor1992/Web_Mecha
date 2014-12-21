@@ -20,7 +20,6 @@ include 'header.php';
 ?>
 <!-- Main Body -->
 		
-		<div style='width:900px;float:left'>
 		<?php
 		//php for Worksheet name user_id type an date
 			$con = mysql_connect($host,$user,$password);
@@ -41,7 +40,7 @@ include 'header.php';
 			$w_type=$row['w_type'];
 			$_SESSION['w_type']=$w_type; //it is neccessary to be in session to know the type!
 		?>
-          <h2 style='text-align:center;font-size:18px'>&nbsp<?php echo $row['w_name']?>&nbsp - Detailed View </h2>
+		<div id="page-title"><h3>Detailed View of the Worksheet :&nbsp<b><?php echo $row['w_name']?> </b> </h3></div>
 		  <h2 style='text-align:center;font-size:15px'>Worksheet type: 
 		  <?php 
 		  switch($w_type)
@@ -55,10 +54,10 @@ include 'header.php';
 		  case 7:echo" CFD1";break;
 		  }
 		  ?>
-		  </h2>
+		  </h3></div>
 		  <h2 style='text-align:center;font-size:15px;'>Date Created: <?php echo $row['w_date']; ?></h2>
-		  <div style='width:900px;text-align:center;float:left;padding:10px'>
-				<div style='text-align:center;width:400px;padding-left:272px'>
+		  <div style='width:950px;text-align:center;float:left;padding:10px'>
+				<div style='text-align:center;width:600px;padding-left:272px'>
 			<form action='question.php' method='post' style='float:left;padding-right:5px'>
 		  <input type='hidden' name='question' id='worksheet' value=1>
 		  <input type='hidden' name='country' id='worksheet' value=23>
@@ -75,8 +74,7 @@ include 'header.php';
 		  <input type='hidden' name='worksheet' id='worksheet' value=<?php echo $row['w_id']; ?>>
 		  <input type='submit' name='Submit' value='Delete Worksheet' />
 		  </form>
-		  <form action=<?php if (isset($_SESSION['worksheet_type'])){echo "worksheet.php?type="; echo $_SESSION['worksheet_type'];}else{echo "worksheet.php";}?>  method='post' style='float:right'>
-		
+		  <form action='worksheet.php' style='float:left' method='post' style='float:right'>	
 		  <input type='submit' name='Submit' value='Go back' />
 		  </form>
 			</div>
@@ -196,8 +194,7 @@ include 'header.php';
 					</tr>
 		</table> 
 			</div>
-		  </div>
-		</div>	
+		  </div>	
 		<!-- Footer -->
 
 <?php

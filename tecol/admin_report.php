@@ -25,19 +25,20 @@ include 'header.php';
 <!-- Main Body -->
 		
 		<!---- This is where it all begins -->
-		<div style='width:900px;float:left'>
-          <h3>Generated Reports </h3>
+		<div style='width:970px;float:left'>
+          <div id="page-title"><h3>Generated Reports </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:970px;float:left;padding:10px'>
 		  <fieldset >
 				<legend style='font-size:15px'>Text List</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="100px">User</td>
-						<th width="200px">Report Description</td>
+						<th width="120px">Report Name</td>
+						<th width="75px">Report Type</td>
 						<th >Comment</td>
-						<th width="160px">Date</td>
-						<th width="140px" >Operation</td>
+						<th width="150px">Date Created</td>
+						<th width="140px" >Link</td>
 					</tr>
 					<?php
 					//initial db connection
@@ -61,12 +62,23 @@ include 'header.php';
 					echo "<tr bgcolor='#92CD00' style='text-align:center'>";
 					echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
 					echo "<td>".$row['rep_name']."</td>";
+					echo "<td>";
+					switch($row['r_type'])
+						{
+							case 1:echo" Structural";break;
+							case 2:echo" CFD1";break;
+							case 3:echo" CFD2";break;
+							case 4:echo" CFD3";break;
+							case 5:echo" CFD4";break;
+							case 6:echo" CFD5";break;
+							case 7:echo" CFD1";break;
+						}
+						echo "</td>";
 					echo "<td>".$row['rep_comment']."</td>";
 					echo "<td>".$row['w_date']."</td>";
 					echo "<td>
-							<form style='text-align:center;float:left' method='post' action='report_generator.php'>
-							<input type='hidden' name='string' value='".$row['rep_string']."'/>
-							<input type='submit' name='Submit' value='View' style='width:130px' />
+							<form style='text-align:center;float:left' method='post' action='".$row['rep_link'];
+							echo "'><input type='submit' name='Submit' value='View' style='width:130px' />
 							</form>";
 					}
 					

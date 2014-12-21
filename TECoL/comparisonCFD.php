@@ -30,7 +30,7 @@ include 'worksheet_ready_for_report.php';
 		$result=mysql_query($sql) or die("Cannot retrieve worksheets");
 
 		echo "<div style='text-align:center; width:500px'> 
-		<h2> Select the worksheets for comparison</h2>
+		<div id="page-title"><h3> Select the worksheets for comparison</h3></div>
 		</br>";
 		$i=0;
 		while($row = mysql_fetch_array($result)) {
@@ -56,12 +56,12 @@ include 'worksheet_ready_for_report.php';
     			$other_worksheets = $_POST['other_worksheets'];
     			$no_of_selected_worksheets = count($other_worksheets);
 
-    			echo "<h2> Worksheet ".getWorksheetName($_SESSION['firstWorksheet'])." compared to: ";
+    			echo "<div id="page-title"><h3> Worksheet ".getWorksheetName($_SESSION['firstWorksheet'])." compared to: ";
     			for($i=0; $i < $no_of_selected_worksheets; $i++)
     				 if($i!=$no_of_selected_worksheets-1)
     				    echo getWorksheetName($other_worksheets[$i]).", ";
     				else echo getWorksheetName($other_worksheets[$i]);
-    			echo "</h2><br>";
+    			echo "</h3></div><br>";
     			for($i=0; $i < $no_of_selected_worksheets; $i++)
     			{  
     				if(worksheetReadyForReport($other_worksheets[$i]) == 0){

@@ -15,14 +15,14 @@ include 'header.php';
 ?>
 <!-- Main Body -->
 		
-		<div style='width:900px;float:left'>
-          <h3> Administrator page to view Worksheets </h3>
+		<div style='width:</h3></div>;float:left'>
+          <div id="page-title"><h3> Administrator page to view Worksheets </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  
 		  <fieldset >
 				<legend style='font-size:15px'>Worksheet list sorted for users</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="180px">Username</td>
 						<th >Worksheet Name</td>

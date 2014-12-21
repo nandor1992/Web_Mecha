@@ -10,14 +10,15 @@ print "</script>";
 ?><!-- Header -->
 <?php
 $title= "Login";
-$active=1;
+$style=2;
 include 'header.php';
 ?>
 <!-- Main Body -->
 		
           <form id='login' style='text-align:center' action='login_verify.php' method='post' accept-charset='UTF-8'>
-<fieldset >
-<legend>Login</legend>
+ 
+                        <div id="page-title"><h3><strong>Login</strong></h3></div>
+						
 <input type='hidden' name='submitted' id='submitted' value='1'/>
  
 <label for='username' >UserName:</label>
@@ -28,7 +29,6 @@ include 'header.php';
  </br>
 <input type='submit' name='Submit' value='Submit' />
  
-</fieldset>
 </form>
 		<!-- Footer -->
 

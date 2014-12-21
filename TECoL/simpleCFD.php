@@ -20,7 +20,7 @@ include 'worksheet_ready_for_report.php';
 	mysql_select_db($db_name,$con) or die ("Could not connect to database");
 	$id=$_SESSION['id'];
 	$worksheetSelected=$_SESSION['firstWorksheet'];
-	echo "<h2>You have selected worksheet ".getWorksheetName($worksheetSelected)."</h2><br>";
+	echo "<div id="page-title"><h3>You have selected worksheet ".getWorksheetName($worksheetSelected)."</h3></div><br>";
 	echo "<a href='generate_simple_CFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:center;'>Generate</a>";
 				
 ?>

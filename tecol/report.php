@@ -30,7 +30,7 @@ include 'worksheet_ready_for_report.php';
 		$result=mysql_query($sql) or die("Cannot retrieve worksheets");
 
 		echo "<div style='text-align:center; width:500px'> 
-		<h2> Select the worksheet from which you want the report</h2>
+		<div id='page-title'><h3> Select the worksheet from which you want the report</h3></div>
 		</br>";
 		$i=0;
 
@@ -66,7 +66,7 @@ else
 			$worksheet_type=$row['w_type'];
 		}
 
-		echo "<h2> You have selected " .$worksheet_name."</h2>
+		echo "<div id='page-title'><h3> You have selected " .$worksheet_name."</h3></div>
 		</br>";
 
 		$worksheet_ready=worksheetReadyForReport($_POST['worksheet']);
@@ -75,7 +75,7 @@ else
 		{
 			if($worksheet_type!=STR){
 				
-				echo "<h2> Select your report type</h2>
+				echo "<div id='page-title'><h3> Select your report type</h3></div>
 				</br>
 				<a href='simpleCFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px;  color: black; font-size:16px; font-weight: bold; float:left;'>simple</a>
 				<a href='comparisonCFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:right;'>comparison</a>

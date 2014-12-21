@@ -30,14 +30,14 @@ include 'header.php';
 <!-- Main Body -->
 		
 		<!---- This is where it all begins -->
-		<div style='width:900px;float:left'>
-          <h3>User Control Administrator Page </h3>
+		<div style='width:</h3></div>;float:left'>
+          <div id="page-title"><h3>User Control Administrator Page </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='950px;float:left;padding:10px'>
 		  
 		  <fieldset >
 				<legend style='font-size:15px'>User List</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:952px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="180px">Username</td>
 						<th >Name</td>

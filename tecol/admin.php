@@ -15,10 +15,10 @@ include 'header.php';
 <!-- Main Body -->
 		
 		<!---- This is where it all begins -->
-		<div style='width:900px;float:left'>
-          <h3> Main Administrator Page </h3>
+		<div style='width:970px;float:left'>
+          <div id="page-title"><h3> Main Administrator Page </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:970px;float:left;padding:10px'>
 		  
 		  <div style='width:650px;float:left;'>
 		  <div style='width:311px;height:100px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
@@ -65,7 +65,7 @@ include 'header.php';
 			</form>
 		  </div>
 		  </div>
-		  <div style='width:230px;height:115px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
+		  <div style='width:290px;height:115px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
 		  <b style='font-size:16px'>List and Modify hints</b>
 			
 		  <p style='font-size:13px'>You can see the inserted hints grouped to country type where you can modify the text. </p>
@@ -74,7 +74,7 @@ include 'header.php';
 			<input type='submit' name='Submit' value='Manage' style='width:130px' />
 			</form>
 		  </div>
-		  <div style='width:230px;height:115px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
+		  <div style='width:290px;height:115px;float:left;padding:5px;border-width:2px; border-style: outset; border-color: gray;text-align:center'>
 		  <b style='font-size:16px'>List Visits</b>
 			
 		  <p style='font-size:13px'>You can see the visits grouped by country and the list of allthe ip addresses connected </p>

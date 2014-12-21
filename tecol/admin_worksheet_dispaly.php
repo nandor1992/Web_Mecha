@@ -36,19 +36,23 @@ include 'header.php';
 			$w_type=$row['w_type'];
 		?>
 			<h2  style='text-align:center;font-size:18px'><?php echo $_POST['username'];?> 
-          &nbsp - &nbsp<?php echo $row['w_name']?></h2>
+          &nbsp - &nbsp<?php echo $row['w_name']?></h3></div>
 		  <h2 style='text-align:center;font-size:15px'>Worksheet type: 
 		  <?php 
 		  switch($w_type)
 		  {
-		  case 1:echo "Structured";break;
-		  case 2:echo "CFD";break;
-		  case 3:echo "Combined";break;
+		  case 1:echo" Structural";break;
+		  case 2:echo" CFD1";break;
+		  case 3:echo" CFD2";break;
+		  case 4:echo" CFD3";break;
+		  case 5:echo" CFD4";break;
+		  case 6:echo" CFD5";break;
+		  case 7:echo" CFD1";break;
 		  }
 		  ?>
-		  </h2>
-		  <h2 style='text-align:center;font-size:15px;'>Date Created: <?php echo $row['w_date']; ?></h2>
-		  <div style='width:900px;text-align:center;float:left;padding:10px'>
+		  </h3>
+		  <h2 style='text-align:center;font-size:15px;'>Date Created: <?php echo $row['w_date']; ?></h3>
+		  <div style='width:</h3></div>;text-align:center;float:left;padding:10px'>
 			<div style='text-align:center;width:300px;padding-left:390px'>
 				<form action='admin_worksheets.php' method='post' style='float:left' >
 				<input type='submit' name='Submit' value='Go Back to Worksheets' />
@@ -59,7 +63,7 @@ include 'header.php';
 			</div>
 			<fieldset >
 				<legend style='font-size:15px'>Questions List</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="100px">Question Nr.</th>
 						<th width="200px">Question</th>

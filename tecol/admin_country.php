@@ -29,10 +29,10 @@ include 'header.php';
 ?>
 <!-- Main Body -->
 		
-		<div style='width:900px;float:left'>
-          <h3>Country Administration </h3>
+		<div style='width:</h3></div>;float:left'>
+          <div id="page-title"><h3>Country Administration </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:</h3></div>;float:left;padding:10px'>
 		 <form style='text-align:center' method='post' action='admin_country_resolv.php'>
 		  <b> Insert Country:&nbsp</b>
 							<input type='text' name='country' value=''/>
@@ -40,7 +40,7 @@ include 'header.php';
 							</form> 
 		  <fieldset >
 				<legend style='font-size:15px'>Country List</legend>
-				<table style="width:890px;font-size:12px">
+				<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="180px">Country ID</td>
 						<th >Name</td>

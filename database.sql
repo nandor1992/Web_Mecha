@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2014 at 06:48 PM
+-- Generation Time: Dec 21, 2014 at 07:28 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -35,24 +35,27 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `answer` text NOT NULL,
   PRIMARY KEY (`a_id`),
   UNIQUE KEY `a_id` (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
 
 --
 -- Dumping data for table `answers`
 --
 
 INSERT INTO `answers` (`a_id`, `q_id`, `w_id`, `var_id`, `skip`, `answer`) VALUES
-(53, 1, 10, 1, 0, '23'),
-(54, 2, 10, 2, 0, 'Moldova'),
-(55, 3, 10, 3, 0, 'Sef la bani'),
-(56, 27, 10, 64, 0, '2014'),
-(57, 27, 10, 65, 0, '1.23'),
-(58, 27, 10, 66, 0, '1.25'),
-(59, 27, 10, 67, 0, '1.27'),
-(60, 27, 10, 68, 0, '1.45'),
-(61, 27, 10, 69, 0, '1.69'),
-(62, 28, 10, 70, 0, 'Da pa net'),
-(63, 1, 11, 1, 0, '2');
+(63, 1, 11, 1, 0, '2'),
+(64, 2, 11, 2, 0, 'asda'),
+(65, 3, 11, 3, 0, 'MyIndustry'),
+(66, 23, 11, 50, 0, '2013'),
+(67, 23, 11, 51, 0, '12'),
+(68, 23, 11, 52, 0, '23'),
+(69, 23, 11, 53, 0, '24'),
+(70, 23, 11, 54, 0, '12'),
+(71, 23, 11, 55, 0, '42'),
+(72, 24, 11, 56, 0, 'My arse'),
+(82, 1, 13, 1, 0, '1'),
+(83, 2, 13, 2, 0, '23'),
+(84, 3, 13, 3, 0, '323'),
+(85, 1, 9, 1, 0, '2');
 
 -- --------------------------------------------------------
 
@@ -110,8 +113,9 @@ CREATE TABLE IF NOT EXISTS `generated_reports` (
   `rep_id` int(11) NOT NULL AUTO_INCREMENT,
   `u_id` int(11) NOT NULL,
   `rep_name` varchar(30) NOT NULL,
-  `rep_string` varchar(2000) NOT NULL,
+  `rep_link` varchar(2000) NOT NULL,
   `rep_comment` varchar(1000) NOT NULL,
+  `r_type` int(11) NOT NULL,
   `w_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`rep_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -120,8 +124,8 @@ CREATE TABLE IF NOT EXISTS `generated_reports` (
 -- Dumping data for table `generated_reports`
 --
 
-INSERT INTO `generated_reports` (`rep_id`, `u_id`, `rep_name`, `rep_string`, `rep_comment`, `w_date`) VALUES
-(1, 1, 'Generated Report', '{"anyad":1}', 'This is my comment', '2014-11-27 17:34:04');
+INSERT INTO `generated_reports` (`rep_id`, `u_id`, `rep_name`, `rep_link`, `rep_comment`, `r_type`, `w_date`) VALUES
+(1, 1, 'Generated Report', '/reports/link1.php', 'This is my comment', 1, '2014-11-27 17:34:04');
 
 -- --------------------------------------------------------
 
@@ -135,15 +139,16 @@ CREATE TABLE IF NOT EXISTS `hint` (
   `hint` varchar(2000) NOT NULL,
   `hint_link` varchar(100) NOT NULL,
   PRIMARY KEY (`h_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `hint`
 --
 
 INSERT INTO `hint` (`h_id`, `q_id`, `hint`, `hint_link`) VALUES
-(1, 1, 'fisrt_hint', '/help'),
-(2, 2, 'second hin', '/help');
+(1, 1, 'fisrt_hintfj', 'help.php'),
+(2, 2, 'second hin', 'help.php'),
+(3, 3, 'asda', 'help.php');
 
 -- --------------------------------------------------------
 
@@ -217,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(20) NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `users`
@@ -226,7 +231,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`u_id`, `u_type`, `username`, `password`, `first_name`, `last_name`) VALUES
 (1, 2, 'nandor1992', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Nandor', 'Verba'),
 (3, 2, 'Zoltan21', 'ebbc3c26a34b609dc46f5c3378f96e08', 'Zoltan', 'Nagy'),
-(5, 1, 'nandor', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Dorritos', 'Michael');
+(5, 1, 'nandor', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Dorritos', 'Michael'),
+(6, 1, 'abcdef', '81dc9bdb52d04dc20036dbd8313ed055', 'Nanor', 'Verba');
 
 -- --------------------------------------------------------
 
@@ -318,7 +324,7 @@ INSERT INTO `variable` (`var_id`, `q_id`, `var_name`, `var_text`, `var_type`) VA
 (68, 27, 'CFD34', 'Market share volatility index a years before the date:', 3),
 (69, 27, 'CFD35', 'Market share volatility index on the mentioned year:', 3),
 (70, 28, 'CFD3Q', 'Information source:', 2),
-(71, 29, 'CFD4B', 'Obvious Inovation gaps:', 5),
+(71, 29, 'CFD4B', 'Obvious Inovation gaps:', 4),
 (72, 30, 'CFD4R', 'Description:', 2),
 (73, 31, 'CFD5y', 'The latest year you have information from:', 3),
 (74, 31, 'CFD51', 'Labor productivity four years before the date:', 3),
@@ -385,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
   `w_type` tinyint(1) NOT NULL COMMENT '0 foor base questions, 1 for structural, 2-7:CFD',
   `w_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `worksheet`
@@ -394,9 +400,9 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
 INSERT INTO `worksheet` (`w_id`, `u_id`, `w_name`, `w_type`, `w_date`) VALUES
 (8, 1, 'Try1', 1, '2014-11-27 17:05:46'),
 (9, 1, 'try2', 1, '2014-11-27 17:09:10'),
-(10, 1, 'try1', 4, '2014-11-27 17:09:19'),
 (11, 1, 'qdfsdf', 3, '2014-12-01 14:31:33'),
-(12, 1, 'sdf', 4, '2014-12-01 14:31:51');
+(13, 1, 'try2', 5, '2014-12-09 19:45:06'),
+(15, 1, 'asda', 1, '2014-12-21 18:07:01');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

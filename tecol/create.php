@@ -18,9 +18,9 @@ include 'header.php';
 		
 	
           <form id='login' style='text-align:center' action='create_user.php' method='post' accept-charset='UTF-8'>
-<fieldset >
-<legend>Create New User</legend>
-<h1> Register </h1>
+ 
+                        <div id="page-title"><h3><strong>Register - Create New User</strong></h3>
+                        </div>
  </br>
 <input type='hidden' name='submitted' id='submitted' value='1'/>
  
@@ -38,7 +38,6 @@ include 'header.php';
  </br>
 <input type='submit' name='Submit' value='Create User' />
  
-</fieldset>
 </form>
 	<!-- Footer -->
 

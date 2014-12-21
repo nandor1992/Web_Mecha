@@ -43,10 +43,10 @@ include 'header.php';
 <!-- Main Body -->
 		
 		<!---- This is where it all begins -->
-		<div style='width:900px;float:left'>
-          <h3> Question and Variable management page </h3>
+		<div style='width:</h3></div>;float:left'>
+          <div id="page-title"><h3> Question and Variable management page </h3></div>
           <img src="css/images/highlight.gif" alt="" class="right" />
-		  <div style='width:900px;float:left;padding:10px'>
+		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  
 		  <form id='question' style='text-align:center' action='admin_questions_resolve.php' method='post' accept-charset='UTF-8'>
 			<fieldset >
@@ -57,8 +57,12 @@ include 'header.php';
 			<p style='float:left'> &nbspQuestion Type: &nbsp</p>
 			<select name='w_type' style='width:130;float:left'>
 				<option value='1'>Structured</option>
-				<option value='2'>CFD</option>
-				<option value='3'>Combined</option>
+				<option value='2'>CFD1</option>
+				<option value='3'>CFD2</option>
+				<option value='4'>CFD3</option>
+				<option value='5'>CFD4</option>
+				<option value='6'>CFD5</option>
+				<option value='7'>CFD6</option>
 		  </select>
 			<input type='submit' name='Submit' value='Save Question' style='float:right' />
 			</br></br>
@@ -107,7 +111,7 @@ include 'header.php';
 			<fieldset>
 			<legend>List of Questions and Variables </legend>
 			<!---Displayling allquestions and variables ----->
-			<table style="width:890px;font-size:12px">
+			<table style="width:950px;font-size:12px">
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="100px">Question.VarID</th>
 						<th width="80px">Type</th>

@@ -17,7 +17,7 @@ function getRealIpAddr()
 	if ($ip=="::1")
 	{
 	//echo $host;
-	$ip="94.3.12.255";
+	$ip="94.3.12.256";
 	}
    return $ip;
 }
@@ -54,6 +54,14 @@ mysql_select_db($db_name,$con) or die ("Could not connect to database");
 $sql="SELECT * FROM visitors WHERE ip='".$ip_req."' ";
 $result=mysql_query($sql) or die("cannot connect 3 ");
 $res2= mysql_num_rows($result);
+if($res2<1)
+{
+$xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".getRealIpAddr());
+ $country_req=$xml->geoplugin_countryName;
+  if ($country_req=="") {$country_req="Unknown";}
+$sql="INSERT INTO `visitors`(`ip`, `country`) VALUES ('".$ip_req."','".$country_req."')";
+$result=mysql_query($sql) or die("cannot connect 3 ");
+}
 session_start();
 $title= "Main Page";
 $style=1;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2014 at 07:28 PM
+-- Generation Time: Jan 11, 2015 at 12:01 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `answer` text NOT NULL,
   PRIMARY KEY (`a_id`),
   UNIQUE KEY `a_id` (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=99 ;
 
 --
 -- Dumping data for table `answers`
@@ -55,7 +55,15 @@ INSERT INTO `answers` (`a_id`, `q_id`, `w_id`, `var_id`, `skip`, `answer`) VALUE
 (82, 1, 13, 1, 0, '1'),
 (83, 2, 13, 2, 0, '23'),
 (84, 3, 13, 3, 0, '323'),
-(85, 1, 9, 1, 0, '2');
+(85, 1, 9, 1, 0, '2'),
+(86, 25, 11, 57, 0, '2014'),
+(87, 25, 11, 58, 0, '1'),
+(88, 25, 11, 59, 0, '2'),
+(89, 25, 11, 60, 0, '4'),
+(90, 25, 11, 61, 0, '6'),
+(91, 25, 11, 62, 0, '8'),
+(93, 26, 11, 63, 0, 'My sources Daah'),
+(98, 29, 13, 71, 0, 'yes');
 
 -- --------------------------------------------------------
 
@@ -139,16 +147,25 @@ CREATE TABLE IF NOT EXISTS `hint` (
   `hint` varchar(2000) NOT NULL,
   `hint_link` varchar(100) NOT NULL,
   PRIMARY KEY (`h_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `hint`
 --
 
 INSERT INTO `hint` (`h_id`, `q_id`, `hint`, `hint_link`) VALUES
-(1, 1, 'fisrt_hintfj', 'help.php'),
-(2, 2, 'second hin', 'help.php'),
-(3, 3, 'asda', 'help.php');
+(2, 2, 'The collusion behavior of companies (cartels) can be present in any kind of market. You Dear User should decide which scale you should test with this approach. For detailed information on the subject please follow this link', 'help_market_types.php'),
+(3, 3, '', ''),
+(4, 20, 'You can compare producers or consumers prices. What you Dear Reader should rember is to always compare apples to apples, not to oranges. For further details Please see our guidelines ', 'help_price_index.php'),
+(5, 21, 'You can compare producers or consumers prices. What you Dear Reader should rember is to always compare apples to apples, not to oranges. For further details Please see our guidelines', 'help_price_index.php'),
+(6, 22, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(7, 24, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(8, 26, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(9, 28, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(10, 32, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(11, 34, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(12, 36, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php'),
+(13, 38, 'Dear User in the report TECol is going to generate this field will be the basis on which the reliability of the information provided will be considered, hence the reliability of the whole report. Specific and verifiable data will be appreciated. For more information please read the link', 'help_information_source.php');
 
 -- --------------------------------------------------------
 
@@ -222,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(20) NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `users`
@@ -232,7 +249,8 @@ INSERT INTO `users` (`u_id`, `u_type`, `username`, `password`, `first_name`, `la
 (1, 2, 'nandor1992', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Nandor', 'Verba'),
 (3, 2, 'Zoltan21', 'ebbc3c26a34b609dc46f5c3378f96e08', 'Zoltan', 'Nagy'),
 (5, 1, 'nandor', '6b1b36cbb04b41490bfc0ab2bfa26f86', 'Dorritos', 'Michael'),
-(6, 1, 'abcdef', '81dc9bdb52d04dc20036dbd8313ed055', 'Nanor', 'Verba');
+(6, 1, 'abcdef', '81dc9bdb52d04dc20036dbd8313ed055', 'Nanor', 'Verba'),
+(7, 2, 'dimo', '81dc9bdb52d04dc20036dbd8313ed055', 'Dimo', 'Kyosev');
 
 -- --------------------------------------------------------
 
@@ -391,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `worksheet` (
   `w_type` tinyint(1) NOT NULL COMMENT '0 foor base questions, 1 for structural, 2-7:CFD',
   `w_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `worksheet`

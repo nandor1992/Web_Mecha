@@ -23,7 +23,7 @@ for ($i=0;$i<$_POST['n'];$i++)
 					break;
 				} 
 				break;
-		case 4:
+		case 4:break;
 		case 5: if (empty($answer))
 				{
 					print "<script type=\"text/javascript\">";

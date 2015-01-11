@@ -22,8 +22,15 @@ $sql="SELECT * FROM `hint` WHERE `h_id`='".$_POST['h_id']."'";
 $result=mysql_query($sql) or die("cannot connect 3 ");
 if($row=mysql_fetch_assoc($result))
 {
+
+if(($_POST['text']=="" )&&($_POST['link']==""))
+{
+$sql="DELETE FROM `hint` WHERE h_id='".$_POST['h_id']."'";
+$result=mysql_query($sql) or die("cannot connect 3a ");
+}
+else
 $sql="UPDATE `hint` SET `hint`='".$_POST['text']."',`hint_link`='".$_POST['link']."'  WHERE h_id='".$_POST['h_id']."'";
-$result=mysql_query($sql) or die("cannot connect 3 ");
+$result=mysql_query($sql) or die("cannot connect 3b ");
 }
 else
 {

@@ -4,28 +4,64 @@ session_start();
 ?>
 <!-- Header -->
 <?php
-$title= "Simple CFD Report";
+$title= "Comparison CFD Report";
 $active=5;
-define("STR",1);
 include 'header.php';
+require 'cfd_worksheet_to_pdf.php';
 include 'worksheet_ready_for_report.php';
 ?>
-
 <?php
 	if (!$con)
 	{
 		die('Could not connect: ' . mysql_error());
 	}
-
+	
 	mysql_select_db($db_name,$con) or die ("Could not connect to database");
-	$id=$_SESSION['id'];
+	$u_id=$_SESSION['u_id'];
 	$worksheetSelected=$_SESSION['firstWorksheet'];
-	echo "<div id="page-title"><h3>You have selected worksheet ".getWorksheetName($worksheetSelected)."</h3></div><br>";
-	echo "<a href='generate_simple_CFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:center;'>Generate</a>";
-				
-?>
+	$r_type=$_SESSION['typeOfWorksheetForReport'];
 
-<!--Footer -->
+	?>
+	
+	<form action="<?php $_PHP_SELF ?>" method="POST" >
+	<?php	
+			
+    				echo "</div>";
+
+	   echo"  <br> Report name: 
+		            <input type='text' name='report_name'   maxlength='30' style='width:130;'> <br>
+		            <br> Comment: 
+		            <input type='text' name='comment'  maxlength='100' style='width:330;'> <br><br><br>
+		            <input type='submit' name='report_details' value='Generate Report' style='width:130px;float:left' /> <br>
+		            </form>";
+	if(isset($_POST['report_details']))
+		{ $time=$_SERVER['REQUEST_TIME'];
+	      $date=date('d-m-y H:i:s', $time);
+		  $rep_link='reports/'.$u_id.$_POST['report_name'].$time.'.pdf';
+		  $rep_name=$_POST['report_name'];
+		  $comment=$_POST['comment'];
+		  //generate reports with no of graphs
+		  $other_worksheets=array();
+		  if($r_type==2)
+	            cfd1WorksheetToPDF($worksheetSelected, $other_worksheets, $rep_name, $rep_link, $_SESSION['username'], $comment, 5,1); //question 5 needs graph
+	        else if($r_type==4)
+	        	 cfd1WorksheetToPDF($worksheetSelected, $other_worksheets, $rep_name, $rep_link, $_SESSION['username'], $comment, 4,1); //question 4 needs graph
+	        	else if($r_type==5)
+	        		cfd1WorksheetToPDF($worksheetSelected, $other_worksheets, $rep_name, $rep_link, $_SESSION['username'], $comment, -1,1); //there is no q -1 so no graph will be generated
+	     			else if($r_type==3 || $r_type==6 || $r_type==7)
+	     				cfd2WorksheetToPDF($worksheetSelected, $other_worksheets, $rep_name, $rep_link, $_SESSION['username'], $comment, 4,6,1); //graphs for q 4 and 6
+	     
+	      $sql="INSERT INTO `database`.`generated_reports` ( `u_id`, `rep_name`, `rep_link`, `rep_comment`, `r_type`, `w_date`) VALUES ('$u_id', '$rep_name', '$rep_link', '$comment', '$r_type', '$date')";
+         
+          if($result=mysql_query($sql))
+          	{        	   
+               echo "<script>window.open('http://localhost/tecol/$rep_link')</script>";
+
+            }
+          else echo "<br>Error in generating report";
+
+	  }
+?>
 <?php
 include 'footer.php';
 ?>

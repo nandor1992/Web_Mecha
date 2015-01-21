@@ -25,8 +25,8 @@ include 'worksheet_ready_for_report.php';
     //echo $worksheetSelected;
 	$excludedType=STR;
 	if(!isset($_REQUEST['other_w_for_report']))
-	{
-		$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id' AND w_id!='$worksheetSelected' AND w_type!='$excludedType')";
+	{	$type=$_SESSION['typeOfWorksheetForReport'];
+		$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id' AND w_id!='$worksheetSelected' AND w_type='$type')";
 		$result=mysql_query($sql) or die("Cannot retrieve worksheets");
 
 		echo "<div style='text-align:center; width:500px'> 
@@ -52,8 +52,11 @@ include 'worksheet_ready_for_report.php';
 
     else {
     	if (isset($_POST['other_worksheets'])){
-    		{   $ready_for_report=1; //if all worksheets complete this is 1, otherwise 0
+    		{   
+
+    		    $ready_for_report=1; //if all worksheets complete this is 1, otherwise 0
     			$other_worksheets = $_POST['other_worksheets'];
+    			$_SESSION['otherWorksheets']=$other_worksheets;
     			$no_of_selected_worksheets = count($other_worksheets);
 
     			echo "<div id='page-title'><h3> Worksheet ".getWorksheetName($_SESSION['firstWorksheet'])." compared to: ";

@@ -21,11 +21,13 @@ include 'worksheet_ready_for_report.php';
 
 	mysql_select_db($db_name,$con) or die ("Could not connect to database");
 	$id=$_SESSION['id'];
-
+	unset($_SESSION['otherWorksheets']);
+	
 	if(!isset($_REQUEST['w_for_report']))
-	{	echo "<a href='reportHistory.php' style='display: block;   height: 25px;   text-align: center;  border-radius: 20px;  color: black; font-size:16px; font-weight: bold; float:left;'>Click here to view report history</a><br><br>";
+	{	echo "<a href='report_history.php' style='display: block;   height: 25px;   text-align: center;  border-radius: 20px;  color: black; font-size:16px; font-weight: bold; float:left;'>Click here to view report history</a><br><br>";
 		unset($_SESSION['w_for_report']);
 		unset($_SESSION['firstWorksheet']);
+		unset($_SESSION['typeOfWorksheetForReport']);
 		$sql="SELECT * FROM `worksheet` JOIN `users` ON worksheet.u_id = users.u_id  WHERE (username='$id')";
 		$result=mysql_query($sql) or die("Cannot retrieve worksheets");
 
@@ -64,10 +66,11 @@ else
 		{
 			$worksheet_name=$row['w_name'];
 			$worksheet_type=$row['w_type'];
+			$_SESSION['typeOfWorksheetForReport']=$worksheet_type;
 		}
 
-		echo "<div id='page-title'><h3> You have selected " .$worksheet_name."</h3></div>
-		</br>";
+		//echo "<div id='page-title'><h3> You have selected " .$worksheet_name."</h3></div>";
+		//</br>";
 
 		$worksheet_ready=worksheetReadyForReport($_POST['worksheet']);
 
@@ -75,10 +78,10 @@ else
 		{
 			if($worksheet_type!=STR){
 				
-				echo "<div id='page-title'><h3> Select your report type</h3></div>
-				</br>
+				echo "<div id='page-title'><h3> You have selected " .$worksheet_name." Select your report type<br><br></h3></div>
+				
 				<a href='simpleCFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px;  color: black; font-size:16px; font-weight: bold; float:left;'>simple</a>
-				<a href='comparisonCFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:right;'>comparison</a>
+				<a href='comparisonCFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:left;'>comparison</a>
 				";
 
 			}

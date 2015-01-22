@@ -96,7 +96,11 @@ include 'header.php';
 					<!-- Save and Skip buttons-->
 					<div>	
 						<input type='submit' name='Save' style='width=40px; height:40px;' value='Save' />
-					  	<input type='submit' name='Skip' style='width=40px; height:40px;' value='Skip' />
+						<?php
+						if($w_type==1){
+						echo"	<input type='submit' name='Skip' style='width=40px; height:40px;' value='Skip' />";
+						}
+						?>
 					</div>					
 					<?php
 					//it is necessary because if it reaches the first than it cannot go to the previous and if the last than cannot go further

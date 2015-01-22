@@ -48,6 +48,7 @@ include 'worksheet_ready_for_report.php';
             echo "<input type='submit' name='w_for_report' value='Next' > ";
         else 
         	echo "You must create a worksheet before being able to generate a report";
+			
 		?>
 		
 	</form>
@@ -100,12 +101,25 @@ else
 					
 		}
 		}
-		else  
-			echo "<font color='red'>The worksheet you selected is incomplete, please revise your answers</font>";
-
+		else { 
+			//echo "<font color='red'>The worksheet you selected is incomplete, please revise your answers</font>";
+			unset($_SESSION['w_for_report']);
+			echo "<script>
+			alert('The worksheet you selected is incomplete, please revise your answers!')
+			window.location.href ='report.php';
+			</script>";  
+		}
 	}
 
-	else echo "<font color='red'>Please select a worksheet</font>";
+	else 
+	{
+	//echo "<font color='red'>Please select a worksheet</font>";
+	unset($_SESSION['w_for_report']);
+			echo "<script>
+			alert('Please select a worksheet')
+			window.location.href ='report.php';
+			</script>"; 
+	}
 }
 ?>
 <!-- Footer -->

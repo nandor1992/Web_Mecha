@@ -38,7 +38,7 @@ include 'header.php';
 						<th width="75px">Report Type</td>
 						<th >Comment</td>
 						<th width="150px">Date Created</td>
-						<th width="140px" >Link</td>
+						<th width="80px" >Link</td>
 					</tr>
 					<?php
 					//initial db connection
@@ -77,8 +77,10 @@ include 'header.php';
 					echo "<td>".$row['rep_comment']."</td>";
 					echo "<td>".$row['w_date']."</td>";
 					echo "<td>
-							<form style='text-align:center;float:left' method='post' action='".$row['rep_link'];
-							echo "'><input type='submit' name='Submit' value='View' style='width:130px' />
+							<form style='text-align:center;float:left' method='post' action='open_report.php' 
+							'>
+							<input type='hidden' name='rep_link' id='rep_link' value=".$row['rep_link'].">
+							<input type='submit' name='Submit' value='Open' style='width:80px' />
 							</form>";
 					}
 					

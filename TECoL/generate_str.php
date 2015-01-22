@@ -41,7 +41,7 @@ include 'strWorksheet_to_pdf.php';
          
           if($result=mysql_query($sql))
           	{        	   
-               echo "<script>window.open('http://localhost/tecol/$rep_link')</script>";
+               echo "<script>window.open('".$files_loc."/$rep_link')</script>";
 
             }
           else echo "<br>Error in generating report";

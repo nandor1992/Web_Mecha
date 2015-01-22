@@ -1,10 +1,11 @@
 <?php
 session_start();
+include 'db_settings.php';
 if(isset($_POST['rep_link']))
 	{  $rep_link=$_POST['rep_link']; 	   
                //echo "<script>window.open('http://localhost/tecol/$rep_link')</script>";
     
-     $file = 'C:/xampp/htdocs/TECoL/'.$rep_link;
+     $file = $files_loc.$rep_link;
 
 if(!$file){ // file does not exist
 	die('file not found');

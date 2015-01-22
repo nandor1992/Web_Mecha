@@ -51,11 +51,12 @@ include 'worksheet_ready_for_report.php';
 	     			else if($r_type==3 || $r_type==6 || $r_type==7)
 	     				cfd2WorksheetToPDF($worksheetSelected, $other_worksheets, $rep_name, $rep_link, $_SESSION['username'], $comment, 4,6,1); //graphs for q 4 and 6
 	     
-	      $sql="INSERT INTO `database`.`generated_reports` ( `u_id`, `rep_name`, `rep_link`, `rep_comment`, `r_type`, `w_date`) VALUES ('$u_id', '$rep_name', '$rep_link', '$comment', '$r_type', '$date')";
+	      $sql="INSERT INTO `generated_reports` ( `u_id`, `rep_name`, `rep_link`, `rep_comment`, `r_type`, `w_date`) VALUES ('$u_id', '$rep_name', '$rep_link', '$comment', '$r_type', '$date')";
          
           if($result=mysql_query($sql))
           	{        	   
                echo "<script>window.open('".$files_loc."$rep_link')</script>";
+			   echo "<script>window.location.href ='report.php'	</script>";
 
             }
           else echo "<br>Error in generating report";

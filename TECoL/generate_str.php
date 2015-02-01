@@ -33,8 +33,9 @@ include 'strWorksheet_to_pdf.php';
 	if(isset($_POST['report_details']))
 		{ $time=$_SERVER['REQUEST_TIME'];
 	      $date=date('d-m-y H:i:s', $time);
-		  $rep_link='reports/'.$u_id.$_POST['report_name'].$time.'.pdf';
 		  $rep_name=$_POST['report_name'];
+		  $rep_name = str_replace(' ', '_', $rep_name);
+		  $rep_link='reports/'.$u_id.$rep_name.$time.'.pdf';
 		  $comment=$_POST['comment'];
 	      strWorksheetToPDF($worksheetSelected, $rep_name, $rep_link, $_SESSION['username'], $comment);
 	      $sql="INSERT INTO `generated_reports` ( `u_id`, `rep_name`, `rep_link`, `rep_comment`, `r_type`, `w_date`) VALUES ('$u_id', '$rep_name', '$rep_link', '$comment', '$r_type', '$date')";

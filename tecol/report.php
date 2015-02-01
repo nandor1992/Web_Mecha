@@ -24,7 +24,8 @@ include 'worksheet_ready_for_report.php';
 	unset($_SESSION['otherWorksheets']);
 	
 	if(!isset($_REQUEST['w_for_report']))
-	{	echo "<a href='report_history.php' style='display: block;   height: 25px;   text-align: center;  border-radius: 20px;  color: black; font-size:16px; font-weight: bold; float:left;'>Click here to view report history</a><br><br>";
+	{	echo "<br>";
+	echo "<div style='text-align:center'><a href='report_history.php' style='display: block;   height: 25px;   padding-left:340px; text-align: center;  border-radius: 20px;  color: black; font-size:16px; font-weight: bold; float:left;'>Click here to view report history</a><br></div>";
 		unset($_SESSION['w_for_report']);
 		unset($_SESSION['firstWorksheet']);
 		unset($_SESSION['typeOfWorksheetForReport']);

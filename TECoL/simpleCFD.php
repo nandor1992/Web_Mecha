@@ -37,8 +37,9 @@ include 'worksheet_ready_for_report.php';
 	if(isset($_POST['report_details']))
 		{ $time=$_SERVER['REQUEST_TIME'];
 	      $date=date('d-m-y H:i:s', $time);
-		  $rep_link='reports/'.$u_id.$_POST['report_name'].$time.'.pdf';
-		  $rep_name=$_POST['report_name'];
+			$rep_name=$_POST['report_name'];
+		  $rep_name = str_replace(' ', '_', $rep_name);
+		  $rep_link='reports/'.$u_id.$rep_name.$time.'.pdf';
 		  $comment=$_POST['comment'];
 		  //generate reports with no of graphs
 		  $other_worksheets=array();

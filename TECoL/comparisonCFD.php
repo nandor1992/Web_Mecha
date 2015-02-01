@@ -75,7 +75,7 @@ include 'worksheet_ready_for_report.php';
     				}
     			}
     			if($ready_for_report==1)
-    				echo "<a href='generate_comparison_CFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:center;'>Generate</a>";
+    				echo "</br></br></br><a href='generate_comparison_CFD.php' style='display: block;  width: 220px;  height: 25px;  background: #DCDCDC;  padding: 10px;  text-align: center;  border-radius: 20px; color: black; font-size:16px; font-weight: bold; float:center;'>Generate</a></br>";
     		}
     	}
 	        

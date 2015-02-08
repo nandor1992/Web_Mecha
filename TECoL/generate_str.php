@@ -2,6 +2,7 @@
 session_start();
 
 ?>
+<link rel="stylesheet" href="styles/bootstrap.css" media="screen" type="text/css" />
 <!-- Header -->
 <?php
 $title= "Structural Report";
@@ -20,16 +21,27 @@ include 'strWorksheet_to_pdf.php';
 	$u_id=$_SESSION['u_id'];
 	$worksheetSelected=$_SESSION['firstWorksheet'];
 	$r_type=$_SESSION['typeOfWorksheetForReport'];
-	?>
-	
-	<form action="<?php $_PHP_SELF ?>" method="POST" >
-	<?php	       
-	   echo"  <br> Report name: 
-		            <input type='text' name='report_name'   maxlength='30' style='width:130;'> <br>
-		            <br> Comment: 
-		            <input type='text' name='comment'  maxlength='100' style='width:330;'> <br><br><br>
-		            <input type='submit' name='report_details' value='Generate Report' style='width:130px;float:left' /> <br>
-		            </form>";
+					
+	echo "</br><form action='generate_str.php' method='POST' class='bootstrap-frm'>
+				<h1>Complete Report
+					<span>Give your report a name and if you have any comments/observations regarding any part of the report please add them.</span>
+				</h1>";
+		echo "<label>
+        <span>Report Name :</span>
+        <input  style='height:30px' id='name' type='text' name='report_name' placeholder='Insert a name for your report' />
+		</label>";
+		echo "<label>
+        <span>Comment :</span>
+        <input style='height:30px' id='name' type='text' name='comment' placeholder='Insert a comment for your report' />
+		</label>";
+		
+		echo" <label>
+        <span>&nbsp;</span>
+        <input type='submit' name='report_details' class='button' value='Finish Report' />
+    </label> ";
+		
+				
+		echo "</form>";				
 	if(isset($_POST['report_details']))
 		{ $time=$_SERVER['REQUEST_TIME'];
 	      $date=date('d-m-y H:i:s', $time);

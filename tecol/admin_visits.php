@@ -27,7 +27,6 @@ include 'header.php';
 		<!---- This is where it all begins -->
 		<div style='width:</h3></div>;float:left'>
           <div id="page-title"><h3>Visiters to the Site </h3></div>
-          <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  <fieldset >
 				<legend style='font-size:15px'>Grouping</legend>

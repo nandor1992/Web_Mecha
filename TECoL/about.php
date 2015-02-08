@@ -13,7 +13,6 @@ include 'header.php';
 		
           <h2 style='text-align:center'> About Us </h2>
 		  <h3 style='text-align:center'> </h3>
-          <img src="css/images/highlight.gif" alt="" class="right" />
           <p style='text-align:justify'>The project TECoL - Tools for Enforcing Competition Law is a project promoted by the association Second Chance, based in Bourgas (BG), and funded by the European Commission (Programme "Prevention of and Fight Against Crime", Targeted call for proposals “Financial and Economic Crime – FINEC, Action grants 2012”; reference number HOME/2012/ISEC/AG/FINEC/4000003870.
 
 The main objective of the project is the development of tools for the detection and identification of cartels and other suspicious market strategies.
@@ -24,7 +23,6 @@ The project aims at tackling such ingenuity by enabling the citizens to detect c
 
 The project has started in May 2013 and will run for 24 months.</p>
 			<h3> Objectives</h3>
-          <img src="css/images/highlight.gif" alt="" class="right" />
 			<p style='text-align:justify'> The main objective of the project is to increase the efficiency of financial investigations through the active involvement of civil society and individuals. We also aim to encourage horizontal cooperation, as well as public-private partnerships between active citizens and empowered institutions for the prevention of financial crime.
 
 The specific objective of the project is to develop and distribute tools for the detection and identification of cartels, specifically web-enabled software using advanced algorithms for the evaluation of companies whose behaviour in a given market situation is suspect and probably the result of cartel (e.g. price fixing, etc.) </p>

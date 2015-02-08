@@ -7,29 +7,31 @@ if (isset($_REQUEST['error']) and $_REQUEST['error']==1)
 print "alert('Error,wrong username or passsword!')";
 print "</script>";   
 }
-?><!-- Header -->
+?>
+ <link rel="stylesheet" href="styles/login.css" media="screen" type="text/css" />
+ <!-- Header -->
 <?php
 $title= "Login";
 $style=2;
 include 'header.php';
 ?>
 <!-- Main Body -->
-		
-          <form id='login' style='text-align:center' action='login_verify.php' method='post' accept-charset='UTF-8'>
- 
-                        <div id="page-title"><h3><strong>Login</strong></h3></div>
-						
-<input type='hidden' name='submitted' id='submitted' value='1'/>
- 
-<label for='username' >UserName:</label>
-<input type='text' name='username' id='username'  maxlength="50" />
- </br>
-<label for='password' >Password:</label>
-<input type='password' name='password' id='password' maxlength="50" />
- </br>
-<input type='submit' name='Submit' value='Submit' />
- 
-</form>
+		</br>
+		</br>
+		<div class="login-card">
+    <h1>Log-in</h1><br>
+  <form id='login' style='text-align:center' action='login_verify.php' method='post' accept-charset='UTF-8'>
+  <input type='hidden' name='submitted' id='submitted' value='1'/>
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <input type="submit" name="login" class="login login-submit" value="login">
+  </form>
+
+  <div class="login-help">
+    <p style='font-size:100%'> Not a Member? <a href="create.php"><b>Sign up now!<b></a> </p>
+  </div>
+</div>
+         
 		<!-- Footer -->
 
 <?php

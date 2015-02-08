@@ -32,7 +32,6 @@ include 'header.php';
 		<!---- This is where it all begins -->
 		<div style='width:</h3></div>;float:left'>
           <div id="page-title"><h3>User Control Administrator Page </h3></div>
-          <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='950px;float:left;padding:10px'>
 		  
 		  <fieldset >
@@ -41,6 +40,7 @@ include 'header.php';
 					<tr bgcolor='#FFFFFF' style='text-decoration:underline;'>
 						<th width="180px">Username</td>
 						<th >Name</td>
+						<th width="180px"> Email </td>
 						<th width="100px">User Type</td>
 						<th width="270px" >Operations</td>
 					</tr>
@@ -68,6 +68,7 @@ include 'header.php';
 					else {echo "<tr bgcolor='#C0C0C0' style='text-align:center'>"; $type='Regular User';}
 					echo "<td>".$row['username']."</td>";
 					echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
+					echo "<td>".$row['email']."</td>";
 					echo "<td>".$type."</td>";
 					if ($row['u_type']==2)
 					{ echo "<td>

@@ -27,7 +27,6 @@ include 'header.php';
 		<!---- This is where it all begins -->
 		<div style='width:970px;float:left'>
           <div id="page-title"><h3>Generated Reports </h3></div>
-          <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:970px;float:left;padding:10px'>
 		  <fieldset >
 				<legend style='font-size:15px'>Text List</legend>

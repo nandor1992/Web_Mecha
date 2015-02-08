@@ -45,7 +45,6 @@ include 'header.php';
 		<!---- This is where it all begins -->
 		<div style='width:</h3></div>;float:left'>
           <div id="page-title"><h3> Question and Variable management page </h3></div>
-          <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  
 		  <form id='question' style='text-align:center' action='admin_questions_resolve.php' method='post' accept-charset='UTF-8'>

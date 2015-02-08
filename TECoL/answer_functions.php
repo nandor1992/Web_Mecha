@@ -269,7 +269,7 @@ function insertHint($question_id, $worksheet_id)
 		while ($row = mysql_fetch_assoc($result))
 		{
 			echo"<div style='border: solid 1px white';>
-			 <br><p> Hint : ".$row['hint']. " <a href='".$row['hint_link']."' target='_blank'>Help</a> </p><br></div>";
+			 <br><p> Hint : ".$row['hint']. " <a  style='color:black'  href='".$row['hint_link']."' target='_blank'><b>Help</b></a> </p><br></div>";
 		}
 
 	return $country_id;

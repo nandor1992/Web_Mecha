@@ -2,6 +2,7 @@
 session_start();
 
 ?>
+<link rel="stylesheet" href="styles/bootstrap.css" media="screen" type="text/css" />
 <!-- Header -->
 <?php
 $title= "Comparison CFD Report";
@@ -21,27 +22,35 @@ include 'worksheet_ready_for_report.php';
 	$u_id=$_SESSION['u_id'];
 	$worksheetSelected=$_SESSION['firstWorksheet'];
 	$r_type=$_SESSION['typeOfWorksheetForReport'];
-
-	?>
 	
-	<form action="<?php $_PHP_SELF ?>" method="POST" >
-	<?php	
 			$other_worksheets=$_SESSION['otherWorksheets'];
 			$no_of_selected_worksheets = count($other_worksheets);
 
-    			echo "<div id='page-title'><h3> Worksheet ".getWorksheetName($_SESSION['firstWorksheet'])." compared to: ";
-    			for($i=0; $i < $no_of_selected_worksheets; $i++)
+					
+	echo "</br><form action='generate_comparison_CFD.php' method='POST' class='bootstrap-frm'>
+				<h1>Finish Report
+					<span>Give your report a name and if you have any comments/observations regarding the graphs or any part of the report please add them.</span>
+				</h1>";
+				echo "<p> You are comparing the following reports :<b>".getWorksheetName($_SESSION['firstWorksheet']).", ";
+				for($i=0; $i < $no_of_selected_worksheets; $i++)
     				 if($i!=$no_of_selected_worksheets-1)
     				    echo getWorksheetName($other_worksheets[$i]).", ";
     				else echo getWorksheetName($other_worksheets[$i]);
-    				echo "</div>";
-
-	   echo"  <br> Report name: 
-		            <input type='text' name='report_name'   maxlength='30' style='width:130;'> <br>
-		            <br> Comment: 
-		            <input type='text' name='comment'  maxlength='100' style='width:330;'> <br><br><br>
-		            <input type='submit' name='report_details' value='Generate Report' style='width:130px;float:left' /> <br>
-		            </form>";
+				echo "</b></p></br>";
+		echo "<label>
+        <span>Report Name :</span>
+        <input  style='height:30px' id='name' type='text' name='report_name' placeholder='Insert a name for your report' />
+		</label>";
+		echo "<label>
+        <span>Comment :</span>
+        <input style='height:30px' id='name' type='text' name='comment' placeholder='Insert a comment for your report' />
+		</label>";
+		
+		echo" <label>
+        <span>&nbsp;</span>
+        <input type='submit' name='report_details' class='button' value='Finish Report' />
+    </label> ";	
+	
 	if(isset($_POST['report_details']))
 		{ $time=$_SERVER['REQUEST_TIME'];
 	      $date=date('d-m-y H:i:s', $time);
@@ -68,7 +77,7 @@ include 'worksheet_ready_for_report.php';
 
             }
           else echo "<br>Error in generating report";
-
+			//To-Do: Header somewhere else
 	  }
 ?>
 <?php

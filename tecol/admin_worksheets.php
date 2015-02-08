@@ -17,7 +17,6 @@ include 'header.php';
 		
 		<div style='width:</h3></div>;float:left'>
           <div id="page-title"><h3> Administrator page to view Worksheets </h3></div>
-          <img src="css/images/highlight.gif" alt="" class="right" />
 		  <div style='width:</h3></div>;float:left;padding:10px'>
 		  
 		  <fieldset >

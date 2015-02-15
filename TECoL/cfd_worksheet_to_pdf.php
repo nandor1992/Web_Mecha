@@ -34,7 +34,7 @@ function cfd1WorksheetToPDF($worksheetSelected, $other_worksheets, $reportName, 
 	$first_iteration=0;
 
      	//select the answers for the main worksheet
-	$sql="SELECT var_id, answer, q_id FROM answers WHERE w_id='".$worksheetSelected."'";
+	$sql="SELECT var_id, answer, q_id FROM answers WHERE w_id='".$worksheetSelected."' ORDER BY q_id ASC";
 	$var_ids=mysql_query($sql);
 	    //select the answers for the other worksheets
 	$last_question=' ';
@@ -205,7 +205,7 @@ function cfd2WorksheetToPDF($worksheetSelected, $other_worksheets, $reportName, 
 	$first_iteration=0;
 
      	//select the answers for the main worksheet
-	$sql="SELECT var_id, answer, q_id FROM answers WHERE w_id='".$worksheetSelected."'";
+	$sql="SELECT var_id, answer, q_id FROM answers WHERE w_id='".$worksheetSelected."' ORDER BY q_id ASC";
 	$var_ids=mysql_query($sql);
 	    //select the answers for the other worksheets
 	$last_question=' ';
@@ -270,8 +270,8 @@ function cfd2WorksheetToPDF($worksheetSelected, $other_worksheets, $reportName, 
 	    	$pdf->Row(array( $row['answer']));
 	    	$pdf->Ln(1);
 	    }
-	    else {$pdf->Row(array( getWorksheetName($worksheetSelected).':'.$row['answer']));
-	    	$pdf->Ln(1);}
+	    		else {$pdf->Row(array( getWorksheetName($worksheetSelected).':'.$row['answer']));
+	    				$pdf->Ln(1);}
 
 		 //put the answer from the other worksheets you want to compare to
 
@@ -279,6 +279,13 @@ function cfd2WorksheetToPDF($worksheetSelected, $other_worksheets, $reportName, 
 	    		$sql="SELECT answer FROM answers WHERE w_id='".$other_worksheets[$i]."' AND var_id='".$row['var_id']."'";
 	    		$answer=mysql_query($sql);
 	    		$row3=mysql_fetch_assoc($answer);
+	    		if($row['var_id']=='1'){
+	    			$sql2="SELECT country FROM countries WHERE q_id='".$row3['answer']."'";
+	    			$var_country=mysql_query($sql2);
+	    			$country_name=mysql_fetch_assoc($var_country);
+	    			$row3['answer']=$country_name['country'];
+
+	    	}
 	    		$pdf->Row(array( getWorksheetName($other_worksheets[$i]).': '.$row3['answer']));
 	    		$pdf->Ln(1);
 

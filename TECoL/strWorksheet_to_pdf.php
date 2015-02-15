@@ -29,7 +29,7 @@ function strWorksheetToPDF($worksheetSelected, $reportName, $saveName, $username
      
      $question_index=0;
      	//select the answers
-    	$sql="SELECT var_id, answer, q_id FROM answers WHERE w_id='".$worksheetSelected."'";
+    	$sql="SELECT var_id, answer, q_id FROM answers WHERE w_id='".$worksheetSelected."'ORDER BY q_id ASC";
 	    $var_ids=mysql_query($sql);
 	    $last_question=' ';
 	    while($row=mysql_fetch_assoc($var_ids)){
